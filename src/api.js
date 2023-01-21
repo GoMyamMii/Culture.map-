@@ -28,7 +28,16 @@ export const getSearchData = async ({ queryKey }) => {
         ])
     );
 };
-export const getImage = async ({ queryKey }) => {
+
+// [1].value : 종목
+// [2].value] : 고유번호
+// [3].value]: 이름
+// [9].value : 지정일
+// [10].value : 위치(ex. 서울특별시)
+// [13].value : 시대
+// [18].value : 이미지url
+// [19].value : 내용
+export const getOneData = async ({ queryKey }) => {
   const [_, titleNum, cityNum, careNum] = queryKey;
   return await axios
     .get(
@@ -37,10 +46,6 @@ export const getImage = async ({ queryKey }) => {
     .then(
       (response) =>
         new XMLParser().parseFromString(response.data).children.slice(6)[0]
-          .children[18].value
+          .children
     );
 };
-
-// export const getCultureData = () => {
-//   return axios.get(`https://www.cha.go.kr/cha/SearchKindOpenapiList.do?`).data;
-// };

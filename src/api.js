@@ -29,23 +29,27 @@ export const getSearchData = async ({ queryKey }) => {
     );
 };
 
-// [1].value : 종목
-// [2].value] : 고유번호
-// [3].value]: 이름
-// [9].value : 지정일
-// [10].value : 위치(ex. 서울특별시)
-// [13].value : 시대
-// [18].value : 이미지url
-// [19].value : 내용
 export const getOneData = async ({ queryKey }) => {
   const [_, titleNum, cityNum, careNum] = queryKey;
   return await axios
     .get(
       `${IMAGE_URL}ccbaKdcd=${titleNum}&ccbaAsno=${careNum}&ccbaCtcd=${cityNum}`
     )
-    .then(
-      (response) =>
-        new XMLParser().parseFromString(response.data).children.slice(6)[0]
-          .children
+    .then((response) =>
+      new XMLParser()
+        .parseFromString(response.data)
+        .children.slice(6)
+        .map((item) => [
+          {
+            title: item.children[0].value,
+            id: item.children[1].value,
+            name: item.children[2].value,
+            data: item.children[9].value,
+            city: item.children[10].value,
+            gene: item.children[13].value,
+            image: item.children[18].value,
+            content: item.children[19].value,
+          },
+        ])
     );
 };

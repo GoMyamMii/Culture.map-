@@ -12,7 +12,7 @@ const ListItem = ({ item }) => {
 
   return (
     <div>
-      <img src={data[18]?.value} alt="img" height={100} />
+      <img src={data[0][0].image} alt="img" height={100} />
       <div>id : {item.id}</div>
       <div>title : {item.title}</div>
       <div>name : {item.name}</div>

@@ -1,16 +1,18 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import { getImage } from '../api';
+import { getOneData } from '../api';
 
 const ListItem = ({ item }) => {
   const { data, isLoading } = useQuery(
     ['imageData', item.titleNum, item.cityNum, item.careNum],
-    getImage
+    getOneData
   );
+
+  if (isLoading) return;
 
   return (
     <div>
-      <img src={data} alt="img" height={100} />
+      <img src={data[0][0].image} alt="img" height={100} />
       <div>id : {item.id}</div>
       <div>title : {item.title}</div>
       <div>name : {item.name}</div>

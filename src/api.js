@@ -23,7 +23,7 @@ export const getSearchData = async ({ queryKey }) => {
             cityNum: item.children[10].value,
             careNum: item.children[11].value,
             long: item.children[14].value,
-            let: item.children[15].value,
+            leti: item.children[15].value,
           },
         ])
     );
@@ -43,10 +43,11 @@ export const getOneData = async ({ queryKey }) => {
           {
             title: item.children[0].value,
             id: item.children[1].value,
-            name: item.children[2].value,
-            data: item.children[9].value,
-            city: item.children[10].value,
-            gene: item.children[13].value,
+            name: item.children[2].value.replaceAll('>', '').trim(),
+            data: item.children[9].value.replaceAll('>', '').trim(),
+            city: item.children[10].value.replaceAll('>', '').trim(),
+            position: item.children[11].value.replaceAll('>', '').trim(),
+            gene: item.children[13].value.replaceAll('>', '').trim(),
             image: item.children[18].value,
             content: item.children[19].value,
           },

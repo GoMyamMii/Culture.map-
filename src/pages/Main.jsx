@@ -2,6 +2,7 @@ import { useQuery } from 'react-query';
 import { getSearchData } from '../api';
 import { useState } from 'react';
 import ListItem from '../components/ListItem';
+import MainCarousel from '../components/MainCarousel';
 
 const Main = () => {
   const [cityValue, setCityValue] = useState('');
@@ -25,6 +26,7 @@ const Main = () => {
 
   return (
     <div>
+      <MainCarousel />
       <select onChange={selectCity}>
         <option value="ZZ">지역</option>
         <option value="11">서울</option>

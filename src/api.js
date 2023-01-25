@@ -49,7 +49,7 @@ export const getOneData = async ({ queryKey }) => {
             position: item.children[11].value.replaceAll('>', '').trim(),
             gene: item.children[13].value.replaceAll('>', '').trim(),
             image: item.children[18].value,
-            content: item.children[19].value,
+            content: item.children[19].value.replaceAll('>', '').trim(),
           },
         ])
     );

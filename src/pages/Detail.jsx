@@ -8,13 +8,19 @@ const Detail = () => {
   const { title, name, long, leti, content, gene, date, position, image } =
     detailData;
   useEffect(() => {
-    const container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-    const options = {
-      //지도를 생성할 때 필요한 기본 옵션
-      center: new kakao.maps.LatLng(leti, long), //지도의 중심좌표.
-      level: 3, //지도의 레벨(확대, 축소 정도)
-    };
-    new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+    if (!document.getElementById('map')) {
+      console.log('무야호');
+    } else {
+      const container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+      const options = {
+        //지도를 생성할 때 필요한 기본 옵션
+        center: new kakao.maps.LatLng(leti, long), //지도의 중심좌표.
+        level: 3, //지도의 레벨(확대, 축소 정도)
+      };
+      new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+      console.log('options', options.center.La);
+      console.log('options', options.center.Ma);
+    }
   }, []);
 
   return (
@@ -33,6 +39,7 @@ const Detail = () => {
       {long !== 0 ? (
         <div id="map" style={{ height: 400, width: 400 }}></div>
       ) : null}
+
     </div>
   );
 };

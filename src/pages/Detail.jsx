@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { useQuery } from 'react-query';
 import { useLocation } from 'react-router-dom';
+import noImg from '../image/no-image.png';
 const { kakao } = window;
 const Detail = () => {
   const location = useLocation();
@@ -19,14 +19,20 @@ const Detail = () => {
 
   return (
     <div>
-      <img src={image} style={{ height: 400, width: 400 }} />
-      <div>종목 : {title}</div>
-      <div>이름 : {name}</div>
-      <div>시대 : {gene}</div>
-      <div>등록일 : {date}</div>
-      <div>소재지 : {position}</div>
-      <div>내용 : {content}</div>
-      <div id="map" style={{ height: 400, width: 400 }}></div>
+      {image ? (
+        <img src={image} style={{ height: 400, width: 400 }} alt="img" />
+      ) : (
+        <img src={noImg} style={{ height: 400, width: 400 }} alt="img" />
+      )}
+      <div>종목 : {title === ('' || null) ? '없음' : title}</div>
+      <div>이름 : {name === ('' || null) ? '없음' : name}</div>
+      <div>시대 : {gene === '' ? '미상' : gene}</div>
+      <div>등록일 : {date === undefined ? '미상' : date}</div>
+      <div>소재지 : {position === '' ? '없음' : position}</div>
+      <div>내용 : {content === '' ? '없음' : content}</div>
+      {long !== 0 ? (
+        <div id="map" style={{ height: 400, width: 400 }}></div>
+      ) : null}
     </div>
   );
 };

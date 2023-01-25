@@ -1,11 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 //@ts-ignore
 import { Fade } from 'react-reveal';
 import '../scroll.css';
 
-const { kakao }: any = window;
+const { kakao } = window;
 const Detail = () => {
   const location = useLocation();
   const detailData = location.state;
@@ -19,7 +19,6 @@ const Detail = () => {
 
   useEffect(() => {
     if (!document.getElementById('map')) {
-      console.log('무야호');
     } else {
       const container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
       const options = {
@@ -54,7 +53,7 @@ const Detail = () => {
   return (
     <Container>
       <Acontainer>
-        <Fade duration={2000} delay={500}>
+        <Fade duration={1000} delay={200}>
           <A1container>
             {image ? (
               <img
@@ -77,10 +76,10 @@ const Detail = () => {
         </Fade>
 
         <A2container>
-          <Fade duration={4000} delay={1000}>
+          <Fade duration={1000} delay={500}>
             <Name>{name === ('' || null) ? '없음' : name}</Name>
           </Fade>
-          <Fade duration={6000} delay={2000}>
+          <Fade duration={1000} delay={800}>
             <SubName>종목 : {title === ('' || null) ? '없음' : title}</SubName>
             <SubName>등록일 : {date === undefined ? '미상' : date}</SubName>
             <SubName>시대 : {gene === '' ? '미상' : gene}</SubName>
@@ -89,11 +88,11 @@ const Detail = () => {
         </A2container>
       </Acontainer>
 
-      <Fade duration={8000} delay={4000}>
+      <Fade duration={1000} delay={1100}>
         <Bcontainer>내용 : {content === '' ? '없음' : content}</Bcontainer>
       </Fade>
 
-      <Fade duration={10000} delay={8000}>
+      <Fade duration={1000} delay={1400}>
         <Ccontainer>
           {long !== 0 ? (
             <div

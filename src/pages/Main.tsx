@@ -1,23 +1,25 @@
 import { useQuery } from 'react-query';
 import { getSearchData } from '../api';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import ListItem from '../components/ListItem';
 import MainCarousel from '../components/MainCarousel';
 import styled from 'styled-components';
 
 const Main = () => {
-  const [cityValue, setCityValue] = useState('');
-  const [titleValue, setTitleValue] = useState('');
+  const [cityValue, setCityValue] = useState('11');
+  const [titleValue, setTitleValue] = useState('11');
 
-  const { data: selectData, isLoading: selectLoading } = useQuery(
-    ['cityData', cityValue, titleValue],
-    getSearchData
+  const { data: selectData, isLoading: selectLoading } = useQuery<any>(
+    'cityData',
+    () => {
+      getSearchData({ cityValue, titleValue });
+    }
   );
 
-  const selectCity = (event: any) => {
+  const selectCity = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setCityValue(event.target.value);
   };
-  const selectTitle = (event: any) => {
+  const selectTitle = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setTitleValue(event.target.value);
   };
 
@@ -68,7 +70,7 @@ const Main = () => {
         </Select>
       </SelectWrap>
       <List>
-        {selectData?.flat().map((item: any) => (
+        {selectData?.flat().map((item: ItemType) => (
           <ListItem item={item} key={item.id} />
         ))}
       </List>

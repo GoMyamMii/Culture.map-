@@ -3,13 +3,15 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { getOneData } from '../api';
 
-const ListItem: any = ({ item }: any) => {
-  const { data, isLoading } = useQuery(
-    ['imageData', item.titleNum, item.cityNum, item.careNum],
-    getOneData
+const ListItem = ({ item }: { item: ItemType }) => {
+  const { data, isLoading }: { data: any; isLoading: boolean } = useQuery(
+    ['imageData'],
+    () => {
+      getOneData(item);
+    }
   );
 
-  if (isLoading) return;
+  if (isLoading) return <></>;
   return (
     <ItemContainer>
       <Link

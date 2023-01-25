@@ -5,42 +5,47 @@ import XMLParser from 'react-xml-parser';
 const BASE_URL = 'https://www.cha.go.kr/cha/SearchKindOpenapiList.do?';
 const IMAGE_URL = 'http://www.cha.go.kr/cha/SearchKindOpenapiDt.do?';
 
-export const getSearchData = async ({ queryKey }: any) => {
-  const [_, cityValue, careValue] = queryKey;
-  return await axios
-    .get(`${BASE_URL}ccbaCtcd=${cityValue}&ccbaKdcd=${careValue}&pageUnit=10`)
-    .then((response) =>
-      new XMLParser()
-        .parseFromString(response.data)
-        .children.slice(3)
-        .map((item: any) => [
-          {
-            total: item.children[0].value,
-            id: item.children[1].value,
-            title: item.children[2].value.replaceAll('>', '').trim(),
-            name: item.children[4].value.replaceAll('>', '').trim(),
-            city: item.children[6].value.replaceAll('>', '').trim(),
-            titleNum: item.children[9].value,
-            cityNum: item.children[10].value,
-            careNum: item.children[11].value,
-            long: item.children[14].value,
-            leti: item.children[15].value,
-          },
-        ])
-    );
+export const getSearchData = async (item: any) => {
+  console.log('씨티밸류~', item.cityValue);
+  console.log('타이틀밸류~', item.titleValue);
+  if (item.cityValue && item.titleValue) {
+    return await axios
+      .get(
+        `${BASE_URL}ccbaCtcd=${item.cityValue}&ccbaKdcd=${item.titleValue}&pageUnit=10`
+      )
+      .then((response) =>
+        new XMLParser()
+          .parseFromString(response.data)
+          .children.slice(3)
+          .map((item: ItemType) => [
+            {
+              total: item.children[0].value,
+              id: item.children[1].value,
+              title: item.children[2].value.replaceAll('>', '').trim(),
+              name: item.children[4].value.replaceAll('>', '').trim(),
+              city: item.children[6].value.replaceAll('>', '').trim(),
+              titleNum: item.children[9].value,
+              cityNum: item.children[10].value,
+              careNum: item.children[11].value,
+              long: item.children[14].value,
+              leti: item.children[15].value,
+            },
+          ])
+      );
+  }
 };
 
-export const getOneData = async ({ queryKey }: any) => {
-  const [_, titleNum, cityNum, careNum] = queryKey;
+export const getOneData = async (item: any) => {
+  console.log('애애ㅐ앵', item.titleNum);
   return await axios
     .get(
-      `${IMAGE_URL}ccbaKdcd=${titleNum}&ccbaAsno=${careNum}&ccbaCtcd=${cityNum}`
+      `${IMAGE_URL}ccbaKdcd=${item.titleNum}&ccbaAsno=${item.careNum}&ccbaCtcd=${item.cityNum}`
     )
     .then((response) =>
       new XMLParser()
         .parseFromString(response.data)
         .children.slice(6)
-        .map((item: any) => [
+        .map((item: ItemType) => [
           {
             title: item.children[0].value,
             id: item.children[1].value,

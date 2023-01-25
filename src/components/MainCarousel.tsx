@@ -24,7 +24,7 @@ const MainCarousel = () => {
   return (
     <Wrapper>
       <StyledSlider {...settings}>
-        {selectData?.flat().map((item: any) => (
+        {selectData?.flat().map((item: ItemType) => (
           <CarouselImg item={item} key={item.id} />
         ))}
       </StyledSlider>

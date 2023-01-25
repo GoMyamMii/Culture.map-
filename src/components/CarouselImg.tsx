@@ -1,15 +1,14 @@
-import React from 'react';
 import { useQuery } from 'react-query';
 import { getOneData } from '../api';
 import styled from 'styled-components';
 
-const CarouselImg: any = ({ item }: any) => {
+const CarouselImg = ({ item }: { item: ItemType }) => {
   const { data, isLoading } = useQuery(
     ['imageData', item.titleNum, item.cityNum, item.careNum],
     getOneData
   );
 
-  if (isLoading) return;
+  if (isLoading) return <></>;
 
   return (
     <CarouselBox>

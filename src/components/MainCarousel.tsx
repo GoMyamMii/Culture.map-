@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+//@ts-ignore
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -23,7 +24,7 @@ const MainCarousel = () => {
   return (
     <Wrapper>
       <StyledSlider {...settings}>
-        {selectData?.flat().map((item) => (
+        {selectData?.flat().map((item: any) => (
           <CarouselImg item={item} key={item.id} />
         ))}
       </StyledSlider>

@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import noImg from '../image/no-image.png';
+//@ts-ignore
 import { Fade } from 'react-reveal';
 import '../scroll.css';
 
-const { kakao } = window;
+const { kakao }: any = window;
 const Detail = () => {
   const location = useLocation();
   const detailData = location.state;
@@ -67,7 +67,11 @@ const Detail = () => {
                 alt="img"
               />
             ) : (
-              <img src={noImg} style={{ height: 400, width: 400 }} alt="img" />
+              <img
+                src={'../image/no-image'}
+                style={{ height: 400, width: 400 }}
+                alt="img"
+              />
             )}
           </A1container>
         </Fade>

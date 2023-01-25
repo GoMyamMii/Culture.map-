@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import { getOneData } from '../api';
 import styled from 'styled-components';
 
-const CarouselImg = ({ item }) => {
+const CarouselImg: any = ({ item }: any) => {
   const { data, isLoading } = useQuery(
     ['imageData', item.titleNum, item.cityNum, item.careNum],
     getOneData

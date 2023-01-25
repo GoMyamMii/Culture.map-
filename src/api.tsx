@@ -1,10 +1,11 @@
 import axios from 'axios';
+//@ts-ignore <- 이거하면 밑에줄 코드(1줄) 자바스크립트로 인식함
 import XMLParser from 'react-xml-parser';
 
 const BASE_URL = 'https://www.cha.go.kr/cha/SearchKindOpenapiList.do?';
 const IMAGE_URL = 'http://www.cha.go.kr/cha/SearchKindOpenapiDt.do?';
 
-export const getSearchData = async ({ queryKey }) => {
+export const getSearchData = async ({ queryKey }: any) => {
   const [_, cityValue, careValue] = queryKey;
   return await axios
     .get(`${BASE_URL}ccbaCtcd=${cityValue}&ccbaKdcd=${careValue}&pageUnit=10`)
@@ -12,7 +13,7 @@ export const getSearchData = async ({ queryKey }) => {
       new XMLParser()
         .parseFromString(response.data)
         .children.slice(3)
-        .map((item) => [
+        .map((item: any) => [
           {
             total: item.children[0].value,
             id: item.children[1].value,
@@ -29,7 +30,7 @@ export const getSearchData = async ({ queryKey }) => {
     );
 };
 
-export const getOneData = async ({ queryKey }) => {
+export const getOneData = async ({ queryKey }: any) => {
   const [_, titleNum, cityNum, careNum] = queryKey;
   return await axios
     .get(
@@ -39,7 +40,7 @@ export const getOneData = async ({ queryKey }) => {
       new XMLParser()
         .parseFromString(response.data)
         .children.slice(6)
-        .map((item) => [
+        .map((item: any) => [
           {
             title: item.children[0].value,
             id: item.children[1].value,

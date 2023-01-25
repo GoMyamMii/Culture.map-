@@ -14,10 +14,10 @@ const Main = () => {
     getSearchData
   );
 
-  const selectCity = (event) => {
+  const selectCity = (event: any) => {
     setCityValue(event.target.value);
   };
-  const selectTitle = (event) => {
+  const selectTitle = (event: any) => {
     setTitleValue(event.target.value);
   };
 
@@ -68,7 +68,7 @@ const Main = () => {
         </Select>
       </SelectWrap>
       <List>
-        {selectData?.flat().map((item) => (
+        {selectData?.flat().map((item: any) => (
           <ListItem item={item} key={item.id} />
         ))}
       </List>

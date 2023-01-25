@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { getOneData } from '../api';
 
-const ListItem = ({ item }) => {
+const ListItem: any = ({ item }: any) => {
   const { data, isLoading } = useQuery(
     ['imageData', item.titleNum, item.cityNum, item.careNum],
     getOneData

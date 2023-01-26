@@ -23,6 +23,7 @@ export default function Modal({
       deleteMutate(item, {
         onSuccess: () => {
           queryClient.invalidateQueries('reviews');
+          setDeleteToggle(false);
         },
       });
     } else {

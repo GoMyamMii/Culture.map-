@@ -7,7 +7,6 @@ import ReviewList from '../components/ReviewList';
 
 import { useQuery } from 'react-query';
 import { readReview } from '../api';
-import { url } from 'inspector';
 
 const Detail = () => {
   const { kakao } = window;
@@ -100,7 +99,7 @@ const Detail = () => {
         </Ccontainer>
       </Fade>
       <ReviewListWrap>
-        <Fade duration={1000} delay={1600}>
+        <Fade duration={1000} delay={1500}>
           <ReviewButton
             onClick={() => {
               setToggle(!toggle);

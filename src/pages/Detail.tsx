@@ -5,12 +5,18 @@ import styled from 'styled-components';
 import { Fade } from 'react-reveal';
 import '../scroll.css';
 import ReviewList from '../components/ReviewList';
+import { useQuery } from 'react-query';
+import { readReview } from '../api';
 
 const Detail = () => {
   const { kakao } = window;
   const location = useLocation();
   const detailData = location.state;
-  const { title, name, long, leti, content, gene, date, position, image } =
+  const { data: reviewData, isLoading: reviewLoading } = useQuery(
+    'reviews',
+    readReview
+  );
+  const { id, title, name, long, leti, content, gene, date, position, image } =
     detailData;
 
   const [toggle, setToggle] = useState(false);
@@ -28,6 +34,18 @@ const Detail = () => {
     }
   }, []);
 
+  // 38 ~ 43 -> 조건문이 없으면 undefined에 할당할 수 없다고 하기 때문에 reviewData가 undefined라면 빈 배열을 반환 함.
+  let itemData: reviewType[];
+  if (reviewData === undefined) {
+    itemData = [];
+  } else {
+    itemData = reviewData?.filter((data: reviewType) => data.cultureId === id);
+  }
+
+  // const itemData = reviewData?.filter((data: reviewType) => data.cultureId === id);
+  if (reviewLoading) {
+    return <div>리뷰 로딩중...</div>;
+  }
   return (
     <Container>
       <Acontainer>
@@ -86,9 +104,11 @@ const Detail = () => {
             setToggle(!toggle);
           }}
         >
-          리뷰보기
+          {toggle ? '리뷰닫기' : '리뷰보기'}
         </button>
-        {toggle ? <ReviewList /> : <></>}
+        <div>
+          {toggle ? <ReviewList itemData={itemData} cultureId={id} /> : <></>}
+        </div>
       </Fade>
     </Container>
   );

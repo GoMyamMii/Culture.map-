@@ -99,18 +99,18 @@ const Detail = () => {
           ) : null}
         </Ccontainer>
       </Fade>
-      <Fade duration={1000} delay={1600}>
-        <button
-          onClick={() => {
-            setToggle(!toggle);
-          }}
-        >
-          {toggle ? '리뷰닫기' : '리뷰보기'}
-        </button>
-        <div>
+      <ReviewListWrap>
+        <Fade duration={1000} delay={1600}>
+          <ReviewButton
+            onClick={() => {
+              setToggle(!toggle);
+            }}
+          >
+            {toggle ? '리뷰닫기' : '리뷰보기'}
+          </ReviewButton>
           {toggle ? <ReviewList itemData={itemData} cultureId={id} /> : <></>}
-        </div>
-      </Fade>
+        </Fade>
+      </ReviewListWrap>
     </Container>
   );
 };
@@ -126,6 +126,8 @@ const Container = styled.div`
 const Acontainer = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
 `;
 
 const A1container = styled.div``;
@@ -155,4 +157,27 @@ const Bcontainer = styled.div`
 `;
 const Ccontainer = styled.div`
   margin-top: 50px;
+`;
+const ReviewListWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+const ReviewButton = styled.button`
+  width: 100px;
+  height: 30px;
+  margin: 20px;
+  border-radius: 15px;
+  border: none;
+  background-color: black;
+  transition: 0.7s;
+  color: white;
+  cursor: pointer;
+  &:hover {
+    background-color: #ffffff;
+    color: black;
+    border: 1px solid black;
+    transition: 0.7s;
+  }
 `;

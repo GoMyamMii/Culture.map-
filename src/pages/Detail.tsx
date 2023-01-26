@@ -3,13 +3,11 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 //@ts-ignore
 import { Fade } from 'react-reveal';
-import '../scroll.css';
 import ReviewList from '../components/ReviewList';
 
 import { useQuery } from 'react-query';
 import { readReview } from '../api';
 import { url } from 'inspector';
-
 
 const Detail = () => {
   const { kakao } = window;

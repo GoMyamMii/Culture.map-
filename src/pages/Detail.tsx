@@ -73,7 +73,7 @@ const Detail = () => {
 
       <Fade duration={1000} delay={1400}>
         <Ccontainer>
-          {long !== 0 ? (
+          {long !== '0' ? (
             <div
               id="map"
               style={{ height: 400, width: '100%', borderRadius: '20px' }}

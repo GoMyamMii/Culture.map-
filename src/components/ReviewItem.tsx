@@ -39,6 +39,10 @@ export default ReviewItem;
 const Wrap = styled.div`
   width: 300px;
   margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 const NameDiv = styled.div``;
 const BodyDiv = styled.div``;

@@ -48,7 +48,7 @@ const ReviewList = ({
 
   return (
     <div>
-      <form onSubmit={submitReview}>
+      <Form onSubmit={submitReview}>
         <div>
           <NameInput
             maxLength={10}
@@ -77,7 +77,7 @@ const ReviewList = ({
         <div>
           <button>작성</button>
         </div>
-      </form>
+      </Form>
       {itemData?.map((item: reviewType) => (
         <ReviewItem key={item.id} item={item} />
       ))}
@@ -87,14 +87,44 @@ const ReviewList = ({
 
 export default ReviewList;
 
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 const NameInput = styled.input`
-  width: 100px;
+  width: 80px;
+  height: 20px;
+  margin: 5px;
+  padding-left: 10px;
+  background-color: #cdcdcd;
+  color: white;
+  border: none;
+  border-radius: 15px;
 `;
 
 const PasswordInput = styled.input`
-  width: 100px;
+  width: 80px;
+  height: 20px;
+  margin: 5px;
+  padding-left: 10px;
+  background-color: #cdcdcd;
+  color: white;
+  border: none;
+  border-radius: 15px;
 `;
 
 const BodyInput = styled.input`
   width: 200px;
+  height: 20px;
+  margin: 5px;
+  padding-left: 10px;
+  background-color: #cdcdcd;
+  color: white;
+  border: none;
+  border-radius: 15px;
 `;
+
+const SubmitButton = styled.button``;

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const CarouselImg = ({ item }: { item: ItemType }) => {
   const { data, isLoading } = useQuery(
-    ['imageData', item.titleNum, item.cityNum, item.careNum],
+    ['imageData', item.titleNum, item.careNum, item.cityNum],
     getOneData
   );
 

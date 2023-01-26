@@ -15,6 +15,7 @@ const ListItem = ({ item }: { item: ItemType }) => {
         style={{ textDecoration: 'none' }}
         to={`/Detail/${item.id}`}
         state={{
+          id: item.id,
           title: item.title,
           name: item.name,
           image: data[0][0].image,

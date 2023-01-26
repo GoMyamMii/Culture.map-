@@ -12,7 +12,12 @@ const ListItem = ({ item }: { item: ItemType }) => {
     ['getOneData', item.titleNum, item.careNum, item.cityNum],
     getOneData
   );
-  if (isLoading) return <></>;
+  if (isLoading)
+    return (
+      <ItemContainer>
+        <ItemTopWrapUI></ItemTopWrapUI>
+      </ItemContainer>
+    );
   return (
     <ItemContainer>
       <Link
@@ -36,7 +41,9 @@ const ListItem = ({ item }: { item: ItemType }) => {
             <TopName>{item.name}</TopName>
           </NameGeneWarp>
         </ItemTopWrap>
-        <ContentBody>{data[0][0].content}</ContentBody>
+        <ContentBody>
+          {data[0][0].content !== '' ? data[0][0].content : '내용없음'}
+        </ContentBody>
       </Link>
       <div style={{ backgroundColor: '#000' }}></div>
     </ItemContainer>
@@ -61,6 +68,14 @@ const ItemTopWrap = styled.div<ItemTopWrapProps>`
     props.image !== ''
       ? `linear-gradient(#000000d1, #0000008b), url(${props.image})`
       : `linear-gradient(#000000d1, #0000008b), url("./image/no-image.png")`};
+`;
+const ItemTopWrapUI = styled.div`
+  border-radius: 20px;
+  background-position: center;
+  background-size: cover;
+  height: 300px;
+  width: 300px;
+  background-color: #ddd;
 `;
 
 const NameGeneWarp = styled.div`
@@ -91,6 +106,20 @@ const TopGene = styled.div`
 `;
 
 const ContentBody = styled.div`
+  border-radius: 0 0 20px 20px;
+  background-color: gray;
+  color: white;
+  font-size: 12px;
+  height: 90px;
+  padding: 20px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-decoration: none;
+  overflow: scroll;
+  /* text-overflow: inherit; */
+`;
+
+const ContentBodyUI = styled.div`
   border-radius: 0 0 20px 20px;
   background-color: gray;
   color: white;

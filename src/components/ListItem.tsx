@@ -4,13 +4,10 @@ import styled from 'styled-components';
 import { getOneData } from '../api';
 
 const ListItem = ({ item }: { item: ItemType }) => {
-  const { data, isLoading }: { data: any; isLoading: boolean } = useQuery(
-    ['imageData'],
-    () => {
-      getOneData(item);
-    }
+  const { data, isLoading } = useQuery(
+    ['getOneData', item.titleNum, item.careNum, item.cityNum],
+    getOneData
   );
-
   if (isLoading) return <></>;
   return (
     <ItemContainer>

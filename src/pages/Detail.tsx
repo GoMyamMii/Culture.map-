@@ -1,21 +1,19 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 //@ts-ignore
 import { Fade } from 'react-reveal';
 import '../scroll.css';
+import ReviewList from '../components/ReviewList';
 
-const { kakao } = window;
 const Detail = () => {
+  const { kakao } = window;
   const location = useLocation();
   const detailData = location.state;
   const { title, name, long, leti, content, gene, date, position, image } =
     detailData;
 
-  // const containerRef = useRef();
-  // const AcontainerRef = useRef();
-  // const BcontainerRef = useRef();
-  // const CcontainerRef = useRef();
+  const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     if (!document.getElementById('map')) {
@@ -29,26 +27,6 @@ const Detail = () => {
       new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
     }
   }, []);
-
-  // useEffect(() => {
-  //   const observer = new IntersectionObserver((entries) => {
-  //     entries.forEach((entry) => {
-  //       if (entry.isIntersecting) {
-  //         entry.target.style.opacity = 1;
-  //         entry.target.style.transition = 'opacity 1s';
-  //         observer.unobserve(entry.target);
-  //       }
-  //     });
-  //   });
-
-  //   observer.observe(containerRef.current);
-  //   observer.observe(AcontainerRef.current);
-  //   observer.observe(BcontainerRef.current);
-  //   observer.observe(CcontainerRef.current);
-  //   return () => {
-  //     observer.disconnect();
-  //   };
-  // }, []);
 
   return (
     <Container>
@@ -101,6 +79,16 @@ const Detail = () => {
             ></div>
           ) : null}
         </Ccontainer>
+      </Fade>
+      <Fade duration={1000} delay={1600}>
+        <button
+          onClick={() => {
+            setToggle(!toggle);
+          }}
+        >
+          리뷰보기
+        </button>
+        {toggle ? <ReviewList /> : <></>}
       </Fade>
     </Container>
   );

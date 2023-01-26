@@ -10,7 +10,7 @@ const IMAGE_URL = 'http://www.cha.go.kr/cha/SearchKindOpenapiDt.do?';
 export const getSearchData = async ({ queryKey }: any) => {
   const [_, cityValue, titleValue] = queryKey;
   return await axios
-    .get(`${BASE_URL}ccbaCtcd=${cityValue}&ccbaKdcd=${titleValue}&pageUnit=10`)
+    .get(`${BASE_URL}ccbaCtcd=${cityValue}&ccbaKdcd=${titleValue}&pageUnit=50`)
     .then((response) =>
       new XMLParser()
         .parseFromString(response.data)

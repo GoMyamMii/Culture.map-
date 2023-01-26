@@ -117,19 +117,11 @@ const ContentBody = styled.div`
   -webkit-box-orient: vertical;
   text-decoration: none;
   overflow: scroll;
-  /* text-overflow: inherit; */
-`;
+  ::-webkit-scrollbar {
+    display: none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 
-const ContentBodyUI = styled.div`
-  border-radius: 0 0 20px 20px;
-  background-color: gray;
-  color: white;
-  font-size: 12px;
-  height: 90px;
-  padding: 20px;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  text-decoration: none;
-  overflow: scroll;
   /* text-overflow: inherit; */
 `;

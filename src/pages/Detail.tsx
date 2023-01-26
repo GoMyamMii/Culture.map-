@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Fade } from 'react-reveal';
 import '../scroll.css';
 import ReviewList from '../components/ReviewList';
+import { url } from 'inspector';
 
 const Detail = () => {
   const { kakao } = window;
@@ -45,7 +46,7 @@ const Detail = () => {
               />
             ) : (
               <img
-                src={require('../image/no-image.png')}
+                src={'../../image/no-image.png'}
                 style={{ height: 400, width: 400 }}
                 alt="img"
               />

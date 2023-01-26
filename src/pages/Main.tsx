@@ -6,14 +6,21 @@ import MainCarousel from '../components/MainCarousel';
 import styled from 'styled-components';
 
 const Main = () => {
-  const [cityValue, setCityValue] = useState('11');
-  const [titleValue, setTitleValue] = useState('11');
+  const [cityValue, setCityValue] = useState('');
+  const [titleValue, setTitleValue] = useState('');
+  const [submitCity, setSubmitCity] = useState('11');
+  const [submitTitle, setSubmitTitle] = useState('11');
 
   const { data: selectData, isLoading: selectLoading } = useQuery(
-    ['searchData', cityValue, titleValue],
+    ['searchData', submitCity, submitTitle],
 
     getSearchData
   );
+
+  const handleSearchBtnClick = (cityValue: string, titleValue: string) => {
+    setSubmitCity(cityValue);
+    setSubmitTitle(titleValue);
+  };
 
   const selectCity = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setCityValue(event.target.value);
@@ -67,6 +74,13 @@ const Main = () => {
               <option value="31">문화재자료</option>
               <option value="79">국가등록문화재</option>
             </Select>
+            <SearchBtn
+              onClick={() => {
+                handleSearchBtnClick(cityValue, titleValue);
+              }}
+            >
+              검색
+            </SearchBtn>
           </SelectWrap>
           <List>
             {selectData?.flat().map((item: ItemType) => (
@@ -83,6 +97,7 @@ export default Main;
 
 const SelectWrap = styled.div`
   margin-left: 50px;
+  display: flex;
 `;
 const Select = styled.select`
   margin-right: 5px;
@@ -92,6 +107,17 @@ const Select = styled.select`
   border-radius: 20px;
   border: none;
   background-color: #b5b5b5;
+`;
+
+const SearchBtn = styled.button`
+  width: 100px;
+  height: 20px;
+  border-radius: 20px;
+  border: none;
+  background-color: #666;
+  color: white;
+  padding-left: 5px;
+  cursor: pointer;
 `;
 
 const List = styled.div`

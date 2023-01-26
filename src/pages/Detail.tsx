@@ -5,8 +5,11 @@ import styled from 'styled-components';
 import { Fade } from 'react-reveal';
 import '../scroll.css';
 import ReviewList from '../components/ReviewList';
+
 import { useQuery } from 'react-query';
 import { readReview } from '../api';
+import { url } from 'inspector';
+
 
 const Detail = () => {
   const { kakao } = window;
@@ -63,7 +66,7 @@ const Detail = () => {
               />
             ) : (
               <img
-                src={'../image/no-image'}
+                src={'../../image/no-image.png'}
                 style={{ height: 400, width: 400 }}
                 alt="img"
               />
@@ -90,7 +93,7 @@ const Detail = () => {
 
       <Fade duration={1000} delay={1400}>
         <Ccontainer>
-          {long !== 0 ? (
+          {long !== '0' ? (
             <div
               id="map"
               style={{ height: 400, width: '100%', borderRadius: '20px' }}

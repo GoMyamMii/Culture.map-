@@ -4,6 +4,11 @@ declare interface ItemType {
   [key: string]: string | number;
 }
 
+declare interface reviewType {
+  [key: string]: string | number;
+  cultureId?: string;
+}
+
 declare interface Window {
   kakao: any;
 }

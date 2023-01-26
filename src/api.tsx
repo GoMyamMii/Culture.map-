@@ -1,5 +1,14 @@
+import { async } from '@firebase/util';
 import axios from 'axios';
-import { addDoc, collection } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  orderBy,
+  query,
+} from 'firebase/firestore';
 //@ts-ignore <- 이거하면 밑에줄 코드(1줄) 자바스크립트로 인식함
 import XMLParser from 'react-xml-parser';
 import { dbService } from './firebase';
@@ -58,11 +67,32 @@ export const getOneData = async ({ queryKey }: any) => {
     );
 };
 
-export const createReview = async (item: any) => {
+export const createReview = async (item: reviewType) => {
   await addDoc(collection(dbService, 'reviews'), {
+    cultureId: item.cultureId,
     createAt: Date.now(),
     name: item.name,
     password: item.password,
     body: item.body,
   });
+};
+export const readReview = async () => {
+  let getReviewsData: reviewType[] = [];
+  const q = query(
+    collection(dbService, `reviews`),
+    orderBy('createAt', 'desc')
+  );
+  const docs = await getDocs(q);
+  docs.forEach((doc) => {
+    const Data = {
+      id: doc.id,
+      ...doc.data(),
+    };
+    getReviewsData.push(Data);
+  });
+  return getReviewsData;
+};
+
+export const deleteReview = async (item: reviewType) => {
+  deleteDoc(doc(dbService, `reviews/${item.id}`));
 };

@@ -13,7 +13,6 @@ const Main = () => {
 
   const { data: selectData, isLoading: selectLoading } = useQuery(
     ['searchData', submitCity, submitTitle],
-
     getSearchData
   );
 

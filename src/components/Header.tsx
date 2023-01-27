@@ -10,6 +10,7 @@ export default function Header() {
 }
 
 const HeaderContainer = styled.div`
+  font-family: 'Gugi', cursive;
   background-color: #242c44;
   color: white;
   height: 50px;

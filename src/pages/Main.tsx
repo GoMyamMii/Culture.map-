@@ -124,6 +124,7 @@ const Main = () => {
 export default Main;
 
 const MainContainer = styled.div`
+font-family: 'Noto Sans KR', sans-serif;
   max-width: 100%;
 `;
 const MainContents = styled.div`

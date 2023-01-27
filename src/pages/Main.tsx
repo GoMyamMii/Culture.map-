@@ -1,6 +1,6 @@
-import { useQuery } from 'react-query';
+import { useInfiniteQuery, useQuery } from 'react-query';
 import { getSearchData } from '../api';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ListItem from '../components/ListItem';
 import MainCarousel from '../components/MainCarousel';
 import styled from 'styled-components';
@@ -11,10 +11,31 @@ const Main = () => {
   const [submitCity, setSubmitCity] = useState('11');
   const [submitTitle, setSubmitTitle] = useState('11');
 
-  const { data: selectData, isLoading: selectLoading } = useQuery(
+  const { data: selectData, isLoading: selectLoading } = useInfiniteQuery(
     ['searchData', submitCity, submitTitle],
 
     getSearchData
+  );
+
+  //console.log('data: ', selectData?.pages[0]);
+
+  // const datas: any = selectData;
+  // console.log(datas);
+
+  const {
+    data: datas,
+    hasNextPage,
+    fetchNextPage,
+  } = useInfiniteQuery(
+    ['searchData', submitCity, submitTitle],
+    getSearchData,
+    // ({ pageParam = 1 }) => getSearchData(pageParam),
+    {
+      getNextPageParam: (lastPage, allPages) => {
+        const nextPage = allPages.length + 1;
+        return nextPage;
+      },
+    }
   );
 
   const handleSearchBtnClick = (cityValue: string, titleValue: string) => {
@@ -28,6 +49,25 @@ const Main = () => {
   const selectTitle = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setTitleValue(event.target.value);
   };
+
+  useEffect(() => {
+    let fetching = false;
+
+    const handleScroll = async (e: any) => {
+      const { scrollHeight, scrollTop, clientHeight } =
+        e.target.scrollingElement;
+      if (!fetching && scrollHeight - scrollTop <= clientHeight * 1.2) {
+        fetching = true;
+        if (hasNextPage) await fetchNextPage();
+        fetching = false;
+      }
+    };
+    document.addEventListener('scroll', handleScroll);
+    return () => {
+      document.removeEventListener('scroll', handleScroll);
+    };
+  }, [fetchNextPage, hasNextPage]);
+
   if (selectLoading) {
     return <div>로딩중입니다.</div>;
   }
@@ -83,7 +123,7 @@ const Main = () => {
             </SearchBtn>
           </SelectWrap>
           <List>
-            {selectData?.flat().map((item: ItemType) => (
+            {datas?.pages[0].flat().map((item: ItemType) => (
               <ListItem item={item} key={item.id} />
             ))}
           </List>

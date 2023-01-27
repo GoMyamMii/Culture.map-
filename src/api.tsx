@@ -1,4 +1,3 @@
-import { async } from '@firebase/util';
 import axios from 'axios';
 import {
   addDoc,
@@ -17,28 +16,36 @@ const BASE_URL = 'https://www.cha.go.kr/cha/SearchKindOpenapiList.do?';
 const IMAGE_URL = 'http://www.cha.go.kr/cha/SearchKindOpenapiDt.do?';
 
 export const getSearchData = async ({ queryKey }: any) => {
-  const [_, cityValue, titleValue] = queryKey;
-  return await axios
-    .get(`${BASE_URL}ccbaCtcd=${cityValue}&ccbaKdcd=${titleValue}&pageUnit=50`)
-    .then((response) =>
-      new XMLParser()
-        .parseFromString(response.data)
-        .children.slice(3)
-        .map((item: ItemType) => [
-          {
-            total: item.children[0].value,
-            id: item.children[1].value,
-            title: item.children[2].value.replaceAll('>', '').trim(),
-            name: item.children[4].value.replaceAll('>', '').trim(),
-            city: item.children[6].value.replaceAll('>', '').trim(),
-            titleNum: item.children[9].value,
-            cityNum: item.children[10].value,
-            careNum: item.children[11].value,
-            long: item.children[14].value,
-            leti: item.children[15].value,
-          },
-        ])
-    );
+  const [_, cityValue, titleValue, pageNumber] = queryKey;
+  let data;
+  await axios
+    .get(
+      `${BASE_URL}ccbaCtcd=${cityValue}&ccbaKdcd=${titleValue}&pageIndex=${pageNumber}`
+    )
+    .then((response) => {
+      const responseData = new XMLParser().parseFromString(
+        response.data
+      ).children;
+      const itemData = responseData.slice(3);
+      const pageData = responseData[0].value;
+
+      const mappedItemData = itemData?.map((item: ItemType) => [
+        {
+          total: item.children[0].value,
+          id: item.children[1].value,
+          title: item.children[2].value.replaceAll('>', '').trim(),
+          name: item.children[4].value.replaceAll('>', '').trim(),
+          city: item.children[6].value.replaceAll('>', '').trim(),
+          titleNum: item.children[9].value,
+          cityNum: item.children[10].value,
+          careNum: item.children[11].value,
+          long: item.children[14].value,
+          lat: item.children[15].value,
+        },
+      ]);
+      data = { pageData, mappedItemData };
+    });
+  return data;
 };
 
 export const getOneData = async ({ queryKey }: any) => {

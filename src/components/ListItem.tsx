@@ -32,7 +32,7 @@ const ListItem = ({ item }: { item: ItemType }) => {
           gene: data[0][0].gene,
           position: data[0][0].position,
           long: item.long,
-          leti: item.leti,
+          lat: item.lat,
           content: data[0][0].content,
         }}
       >

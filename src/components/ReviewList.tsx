@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import styled from 'styled-components';
 import { createReview } from '../api';
@@ -61,6 +61,7 @@ const ReviewList = ({
             maxLength={8}
             onChange={onPasswordName}
             value={password}
+            type="password"
             placeholder="비밀번호"
             required
           />

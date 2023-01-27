@@ -45,13 +45,13 @@ const Main = () => {
   if (selectLoading) {
     return <div>로딩중입니다.</div>;
   }
-  console.log('pages : ', pages);
 
   return (
-    <div>
+    <MainContainer>
       {selectLoading ? null : (
-        <div>
+        <>
           <MainCarousel />
+
           <SelectWrap>
             <Select onChange={selectCity}>
               <option value="11">서울</option>
@@ -98,32 +98,46 @@ const Main = () => {
             <div>{itemListData[0][0].city}</div>
             <div>{itemListData[0][0].title}</div>
           </SelectWrap>
-          <MainContainer>
-          <Fade bottom> 
-          <List>
-            {itemListData?.flat().map((item: ItemType) => (
-              <ListItem item={item} key={item.id} />
-            ))}
-          </List>
+          <MainContents>
+            <Fade bottom>
+              <ListBox>
+                <List>
+                  {itemListData?.flat().map((item: ItemType) => (
+                    <ListItem item={item} key={item.id} />
+                  ))}
+                </List>
 
-          {pages.map((item) => (
-            <button onClick={clickPageNumber} value={item}>
-              {item}
-            </button>
-          ))}
-          </Fade>
-          </MainContainer>
-        </div>
+                {pages.map((item) => (
+                  <button onClick={clickPageNumber} value={item}>
+                    {item}
+                  </button>
+                ))}
+              </ListBox>
+            </Fade>
+          </MainContents>
+        </>
       )}
-    </div>
+    </MainContainer>
   );
 };
 
 export default Main;
 
-const SelectWrap = styled.div`
-  margin-left: 50px;
+const MainContainer = styled.div`
+  max-width: 100%;
+`;
+const MainContents = styled.div`
   display: flex;
+  justify-content: center;
+
+  max-width: 1440px;
+`;
+
+const SelectWrap = styled.div`
+  background-color: red;
+  display: flex;
+  width: 1440px;
+  margin: 0 auto;
 `;
 const Select = styled.select`
   margin-right: 5px;
@@ -146,18 +160,17 @@ const SearchBtn = styled.button`
   cursor: pointer;
 `;
 
-const List = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-`;
-
-const  MainContainer = styled.div`
-  position: relative;
-  max-width: 1400px;
-  height: auto;
+const ListBox = styled.div`
+  width: 1440px;
+  justify-content: center;
   margin: 0 auto;
   overflow: cover;
+`;
+
+const List = styled.div`
   display: flex;
-  align-items: center;
   justify-content: center;
-  `;
+  flex-wrap: wrap;
+  width: 1440px;
+  height: auto;
+`;

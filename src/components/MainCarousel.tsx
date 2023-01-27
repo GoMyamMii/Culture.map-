@@ -1,31 +1,22 @@
-import React, { useState } from 'react';
 //@ts-ignore
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import styled from 'styled-components';
 import CarouselImg from './CarouselImg';
-import { getSearchData } from '../api';
-import { useQuery } from 'react-query';
 
 const MainCarousel = () => {
-  const [cityValue, setCityValue] = useState('');
-  const [titleValue, setTitleValue] = useState('');
+  const mainImg01 = './image/mainVisual/mainVisual01.jpg';
+  const mainImg02 = './image/mainVisual/mainVisual02.jpg';
+  const mainImg03 = './image/mainVisual/mainVisual03.jpg';
 
-  const { data: selectData, isLoading: selectLoading } = useQuery(
-    ['cityData', cityValue, titleValue],
-    getSearchData
-  );
-
-  if (selectLoading) {
-    <div>로딩중입니다.</div>;
-  }
+  const mainImgArr = [mainImg01, mainImg02, mainImg03];
 
   return (
     <Wrapper>
       <StyledSlider {...settings}>
-        {selectData?.flat().map((item: ItemType) => (
-          <CarouselImg item={item} key={item.id} />
+        {mainImgArr?.map((item: string) => (
+          <CarouselImg item={item} />
         ))}
       </StyledSlider>
     </Wrapper>
@@ -47,11 +38,15 @@ const settings = {
 
 const Wrapper = styled.div`
   margin: 20px;
+  display: flex;
+  justify-content: center;
 `;
 
 const StyledSlider = styled(Slider)`
   width: 100%;
-  height: 600px;
+
+  max-width: 1920px;
+  height: 550px;
 `;
 
 export default MainCarousel;

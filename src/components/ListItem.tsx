@@ -41,10 +41,12 @@ const ListItem = ({ item }: { item: ItemType }) => {
             <TopGene>{data[0][0].gene}</TopGene>
             <TopName>{item.name}</TopName>
           </NameGeneWarp>
+          <ContentBody>
+            <ContentText>
+              {data[0][0].content !== '' ? data[0][0].content : '내용없음'}
+            </ContentText>
+          </ContentBody>
         </ItemTopWrap>
-        <ContentBody>
-          {data[0][0].content !== '' ? data[0][0].content : '내용없음'}
-        </ContentBody>
       </Link>
       <div style={{ backgroundColor: '#000' }}></div>
     </ItemContainer>
@@ -55,16 +57,16 @@ export default ListItem;
 
 const ItemContainer = styled.div`
   display: flex;
-  width: 300px;
-  height: 300px;
-  margin: 50px;
+  width: 700px;
+  height: 700px;
+  margin: 20px 0;
 `;
 const ItemTopWrap = styled.div<ItemTopWrapProps>`
   border-radius: 20px 20px 0 0;
   background-position: center;
   background-size: cover;
-  height: 70%;
-  width: 300px;
+  height: 500px;
+  width: 700px;
   background-image: ${(props) =>
     props.image !== ''
       ? `linear-gradient(#000000d1, #0000008b), url(${props.image})`
@@ -74,14 +76,12 @@ const ItemTopWrapUI = styled.div`
   border-radius: 20px;
   background-position: center;
   background-size: cover;
-  height: 300px;
-  width: 300px;
+  height: 700px;
+  width: 700px;
   background-color: #ddd;
 `;
 
 const NameGeneWarp = styled.div`
-  margin-right: 20px;
-  padding-top: 20px;
   display: flex;
   flex-direction: row;
   justify-content: right;
@@ -91,37 +91,39 @@ const NameGeneWarp = styled.div`
 
 const TopName = styled.div`
   writing-mode: vertical-rl;
+  text-orientation: upright;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 15px;
-  height: 90%;
+
+  font-size: 48px;
+  margin: 40px 40px 40px 0;
 `;
 const TopGene = styled.div`
   writing-mode: vertical-rl;
+  text-orientation: upright;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 10px;
-  height: 90%;
+  font-size: 24px;
+  margin-top: 40px;
 `;
 
 const ContentBody = styled.div`
   border-radius: 0 0 20px 20px;
   background-color: gray;
+  height: 160px;
+  padding: 20px 40px;
+`;
+const ContentText = styled.span`
+  font-size: 20px;
+  font-weight: 100;
+  line-height: 30px;
   color: white;
-  font-size: 12px;
-  height: 90px;
-  padding: 20px;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  text-decoration: none;
-  overflow: scroll;
-  ::-webkit-scrollbar {
-    display: none;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
 
-  /* text-overflow: inherit; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
 `;

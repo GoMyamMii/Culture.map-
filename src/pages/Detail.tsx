@@ -53,21 +53,9 @@ const Detail = () => {
         <Fade duration={1000} delay={200}>
           <A1container>
             {image ? (
-              <img
-                src={image}
-                style={{
-                  height: 400,
-                  width: 400,
-                  borderRadius: '20px',
-                }}
-                alt="img"
-              />
+              <ImgBox src={image} alt="img" />
             ) : (
-              <img
-                src={'../../image/no-image.png'}
-                style={{ height: 400, width: 400 }}
-                alt="img"
-              />
+              <ImgBox src={'../../image/no-image.png'} alt="img" />
             )}
           </A1container>
         </Fade>
@@ -131,6 +119,12 @@ const Acontainer = styled.div`
 `;
 
 const A1container = styled.div``;
+
+const ImgBox = styled.img`
+  height: 400px;
+  width: 400px;
+  border-radius: 20px;
+`;
 
 const A2container = styled.div`
   display: flex;

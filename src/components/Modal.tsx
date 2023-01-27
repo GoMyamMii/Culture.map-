@@ -40,6 +40,7 @@ export default function Modal({
           <Input
             maxLength={8}
             onChange={changePassword}
+            type="password"
             placeholder="비밀번호"
           />
         </form>

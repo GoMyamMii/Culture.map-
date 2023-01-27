@@ -7,16 +7,20 @@ import styled from 'styled-components';
 import { Fade } from 'react-reveal';
 
 const Main = () => {
-  const [cityValue, setCityValue] = useState('');
-  const [titleValue, setTitleValue] = useState('');
+  const [cityValue, setCityValue] = useState('11');
+  const [titleValue, setTitleValue] = useState('11');
   const [submitCity, setSubmitCity] = useState('11');
   const [submitTitle, setSubmitTitle] = useState('11');
+  const [pageNumber, setPageNumber] = useState('1');
 
-  const { data: selectData, isLoading: selectLoading } = useQuery(
-    ['searchData', submitCity, submitTitle],
-
+  const { data: selectData, isLoading: selectLoading } = useQuery<any>(
+    ['searchData', submitCity, submitTitle, pageNumber],
     getSearchData
   );
+
+  const itemListData = selectData?.mappedItemData;
+  const pageIndexData = selectData?.pageData;
+  const page: number = Math.ceil(pageIndexData / 10);
 
   const handleSearchBtnClick = (cityValue: string, titleValue: string) => {
     setSubmitCity(cityValue);
@@ -29,9 +33,20 @@ const Main = () => {
   const selectTitle = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setTitleValue(event.target.value);
   };
+
+  const clickPageNumber = (event: React.MouseEvent) => {
+    setPageNumber((event.target as HTMLInputElement).value);
+  };
+  const pages = [];
+  for (let i = 1; i < page + 1; i++) {
+    pages.push(i);
+  }
+
   if (selectLoading) {
     return <div>로딩중입니다.</div>;
   }
+  console.log('pages : ', pages);
+
   return (
     <div>
       {selectLoading ? null : (
@@ -39,7 +54,6 @@ const Main = () => {
           <MainCarousel />
           <SelectWrap>
             <Select onChange={selectCity}>
-              <option value="11">지역</option>
               <option value="11">서울</option>
               <option value="21">부산</option>
               <option value="22">대구</option>
@@ -59,7 +73,6 @@ const Main = () => {
               <option value="50">제주</option>
             </Select>
             <Select onChange={selectTitle}>
-              <option value="11">문화재종목</option>
               <option value="11">국보</option>
               <option value="12">보물</option>
               <option value="13">사적</option>
@@ -82,14 +95,22 @@ const Main = () => {
             >
               검색
             </SearchBtn>
+            <div>{itemListData[0][0].city}</div>
+            <div>{itemListData[0][0].title}</div>
           </SelectWrap>
           <MainContainer>
           <Fade bottom> 
           <List>
-            {selectData?.flat().map((item: ItemType) => (
+            {itemListData?.flat().map((item: ItemType) => (
               <ListItem item={item} key={item.id} />
             ))}
           </List>
+
+          {pages.map((item) => (
+            <button onClick={clickPageNumber} value={item}>
+              {item}
+            </button>
+          ))}
           </Fade>
           </MainContainer>
         </div>

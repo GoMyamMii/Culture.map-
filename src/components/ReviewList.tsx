@@ -58,7 +58,7 @@ const ReviewList = ({
             required
           />
           <PasswordInput
-            maxLength={4}
+            maxLength={8}
             onChange={onPasswordName}
             value={password}
             placeholder="비밀번호"
@@ -70,7 +70,7 @@ const ReviewList = ({
             maxLength={48}
             onChange={onBodyName}
             value={body}
-            placeholder="내용"
+            placeholder="내용 (최대 48자)"
             required
           />
         </div>
@@ -98,7 +98,7 @@ const NameInput = styled.input`
   width: 80px;
   height: 20px;
   margin: 5px;
-  padding-left: 10px;
+  text-align: center;
   background-color: #cdcdcd;
   color: white;
   border: none;
@@ -109,7 +109,7 @@ const PasswordInput = styled.input`
   width: 80px;
   height: 20px;
   margin: 5px;
-  padding-left: 10px;
+  text-align: center;
   background-color: #cdcdcd;
   color: white;
   border: none;
@@ -120,11 +120,9 @@ const BodyInput = styled.input`
   width: 200px;
   height: 20px;
   margin: 5px;
-  padding-left: 10px;
+  text-align: center;
   background-color: #cdcdcd;
   color: white;
   border: none;
   border-radius: 15px;
 `;
-
-const SubmitButton = styled.button``;

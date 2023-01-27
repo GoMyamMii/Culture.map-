@@ -100,7 +100,7 @@ const Detail = () => {
         </Ccontainer>
       </Fade>
       <ReviewListWrap>
-        <Fade duration={1000} delay={1600}>
+        <Fade duration={1000} delay={1500}>
           <ReviewButton
             onClick={() => {
               setToggle(!toggle);

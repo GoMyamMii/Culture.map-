@@ -26,7 +26,7 @@ const CarouselBox = styled.div`
 
 const Img = styled.img`
   width: auto;
-  height: 800px;
+  height: 550px;
   margin: auto;
   display: block;
 `;

@@ -4,23 +4,17 @@ import React, { useState } from 'react';
 import ListItem from '../components/ListItem';
 import MainCarousel from '../components/MainCarousel';
 import styled from 'styled-components';
+import { Fade } from 'react-reveal';
 
 const Main = () => {
-  const [cityValue, setCityValue] = useState('');
-  const [titleValue, setTitleValue] = useState('');
-  const [submitCity, setSubmitCity] = useState('11');
-  const [submitTitle, setSubmitTitle] = useState('11');
+  const [cityValue, setCityValue] = useState('11');
+  const [titleValue, setTitleValue] = useState('11');
 
   const { data: selectData, isLoading: selectLoading } = useQuery(
-    ['searchData', submitCity, submitTitle],
+    ['searchData', cityValue, titleValue],
 
     getSearchData
   );
-
-  const handleSearchBtnClick = (cityValue: string, titleValue: string) => {
-    setSubmitCity(cityValue);
-    setSubmitTitle(titleValue);
-  };
 
   const selectCity = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setCityValue(event.target.value);
@@ -74,19 +68,17 @@ const Main = () => {
               <option value="31">문화재자료</option>
               <option value="79">국가등록문화재</option>
             </Select>
-            <SearchBtn
-              onClick={() => {
-                handleSearchBtnClick(cityValue, titleValue);
-              }}
-            >
-              검색
-            </SearchBtn>
           </SelectWrap>
+          <MainContainer>
+            {/* 홈페이지에 보여지는 메인사진이 속도가 느려 시간을줌  */}
+            <Fade bottom delay={1800}> 
           <List>
             {selectData?.flat().map((item: ItemType) => (
               <ListItem item={item} key={item.id} />
             ))}
           </List>
+          </Fade>
+          </MainContainer>
         </div>
       )}
     </div>
@@ -97,7 +89,6 @@ export default Main;
 
 const SelectWrap = styled.div`
   margin-left: 50px;
-  display: flex;
 `;
 const Select = styled.select`
   margin-right: 5px;
@@ -109,18 +100,18 @@ const Select = styled.select`
   background-color: #b5b5b5;
 `;
 
-const SearchBtn = styled.button`
-  width: 100px;
-  height: 20px;
-  border-radius: 20px;
-  border: none;
-  background-color: #666;
-  color: white;
-  padding-left: 5px;
-  cursor: pointer;
-`;
-
 const List = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+`;
+
+const  MainContainer = styled.div`
+  position: relative;
+  max-width: 1400px;
+  height: auto;
+  margin: 0 auto;
+  overflow: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

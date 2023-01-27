@@ -51,7 +51,7 @@ const Wrapper = styled.div`
 
 const StyledSlider = styled(Slider)`
   width: 100%;
-  height: 800px;
+  height: 600px;
 `;
 
 export default MainCarousel;

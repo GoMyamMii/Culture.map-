@@ -7,7 +7,6 @@ import ReviewList from '../components/ReviewList';
 
 import { useQuery } from 'react-query';
 import { readReview } from '../api';
-import { url } from 'inspector';
 
 const Detail = () => {
   const { kakao } = window;
@@ -23,6 +22,7 @@ const Detail = () => {
   const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (!document.getElementById('map')) {
     } else {
       const container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스

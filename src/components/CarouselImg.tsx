@@ -1,34 +1,28 @@
-import { useQuery } from 'react-query';
-import { getOneData } from '../api';
 import styled from 'styled-components';
 
-const CarouselImg = ({ item }: { item: ItemType }) => {
-  const { data, isLoading } = useQuery(
-    ['imageData', item.titleNum, item.careNum, item.cityNum],
-    getOneData
-  );
+interface ImgProps {
+  image: string;
+}
 
-  if (isLoading) return <></>;
-
+const CarouselImg = ({ item }: { item: string }) => {
   return (
     <CarouselBox>
-      <Img src={data[0][0].image} alt="img" />
+      <Img image={item} />
     </CarouselBox>
   );
 };
 
 const CarouselBox = styled.div`
   width: 100%;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  display: flex;
 `;
 
-const Img = styled.img`
-  width: auto;
-  height: 800px;
-  margin: auto;
-  display: block;
+const Img = styled.div<ImgProps>`
+  width: 100%;
+  height: 550px;
+  margin: 0 auto;
+  background-image: url(${(props) => props.image});
+  background-position: center;
 `;
 
 export default CarouselImg;

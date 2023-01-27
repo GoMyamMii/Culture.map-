@@ -44,6 +44,7 @@ const Wrapper = styled.div`
 
 const StyledSlider = styled(Slider)`
   width: 100%;
+
   max-width: 1920px;
   height: 550px;
 `;

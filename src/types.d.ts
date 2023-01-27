@@ -12,3 +12,4 @@ declare interface reviewType {
 declare interface Window {
   kakao: any;
 }
+declare module  "react-reveal";

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import ListItem from '../components/ListItem';
 import MainCarousel from '../components/MainCarousel';
 import styled from 'styled-components';
+import { Fade } from 'react-reveal';
 
 const Main = () => {
   const [cityValue, setCityValue] = useState('11');
@@ -97,16 +98,21 @@ const Main = () => {
             <div>{itemListData[0][0].city}</div>
             <div>{itemListData[0][0].title}</div>
           </SelectWrap>
+          <MainContainer>
+          <Fade bottom> 
           <List>
             {itemListData?.flat().map((item: ItemType) => (
               <ListItem item={item} key={item.id} />
             ))}
           </List>
+
           {pages.map((item) => (
             <button onClick={clickPageNumber} value={item}>
               {item}
             </button>
           ))}
+          </Fade>
+          </MainContainer>
         </div>
       )}
     </div>
@@ -144,3 +150,14 @@ const List = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 `;
+
+const  MainContainer = styled.div`
+  position: relative;
+  max-width: 1400px;
+  height: auto;
+  margin: 0 auto;
+  overflow: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  `;

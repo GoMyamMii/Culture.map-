@@ -12,15 +12,15 @@ export default function Header() {
 const HeaderContainer = styled.div`
   background-color: #242c44;
   color: white;
-  height: 100px;
+  height: 50px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 `;
 const ProjectName = styled.div`
-  font-size: 54px;
+  font-size: 25px;
 `;
 const TeamName = styled.div`
-  font-size: 24px;
+  font-size: 15px;
 `;

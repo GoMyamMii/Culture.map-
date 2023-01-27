@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 //@ts-ignore
@@ -7,6 +7,7 @@ import ReviewList from '../components/ReviewList';
 
 import { useQuery } from 'react-query';
 import { readReview } from '../api';
+import MapKakao from '../components/MapKakao';
 
 const Detail = () => {
   const { kakao } = window;
@@ -16,6 +17,7 @@ const Detail = () => {
     'reviews',
     readReview
   );
+
   const { id, title, name, long, lat, content, gene, date, position, image } =
     detailData;
 
@@ -23,16 +25,6 @@ const Detail = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (!document.getElementById('map')) {
-    } else {
-      const container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-      const options = {
-        //지도를 생성할 때 필요한 기본 옵션
-        center: new kakao.maps.LatLng(lat, long), //지도의 중심좌표.
-        level: 3, //지도의 레벨(확대, 축소 정도)
-      };
-      new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-    }
   }, []);
 
   // 38 ~ 43 -> 조건문이 없으면 undefined에 할당할 수 없다고 하기 때문에 reviewData가 undefined라면 빈 배열을 반환 함.
@@ -79,12 +71,7 @@ const Detail = () => {
 
       <Fade duration={1000} delay={1400}>
         <Ccontainer>
-          {long !== '0' ? (
-            <div
-              id="map"
-              style={{ height: 400, width: '100%', borderRadius: '20px' }}
-            ></div>
-          ) : null}
+          <MapKakao lat={lat} lng={long} />
         </Ccontainer>
       </Fade>
       <ReviewListWrap>
@@ -106,6 +93,7 @@ const Detail = () => {
 export default Detail;
 
 const Container = styled.div`
+  font-family: 'Noto Sans KR', sans-serif;
   margin-inline: 100px;
   margin-top: 50px;
   margin-bottom: 50px;

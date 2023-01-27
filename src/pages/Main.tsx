@@ -142,6 +142,8 @@ const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+font-family: 'Noto Sans KR', sans-serif;
+  max-width: 100%;
 `;
 const MainContents = styled.div`
   display: flex;

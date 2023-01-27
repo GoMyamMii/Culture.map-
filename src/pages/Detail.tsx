@@ -118,6 +118,7 @@ const Detail = () => {
 export default Detail;
 
 const Container = styled.div`
+font-family: 'Noto Sans KR', sans-serif;
   margin-inline: 100px;
   margin-top: 50px;
   margin-bottom: 50px;

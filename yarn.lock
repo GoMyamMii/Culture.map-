@@ -7337,6 +7337,11 @@ just-diff@^5.0.1:
   resolved "https://registry.yarnpkg.com/just-diff/-/just-diff-5.2.0.tgz#60dca55891cf24cd4a094e33504660692348a241"
   integrity sha512-6ufhP9SHjb7jibNFrNxyFZ6od3g+An6Ai9mhGRvcYe8UJlH0prseN64M+6ZBBUoKYHZsitDP42gAJ8+eVWr3lw==
 
+kakao.maps.d.ts@^0.1.33:
+  version "0.1.33"
+  resolved "https://registry.yarnpkg.com/kakao.maps.d.ts/-/kakao.maps.d.ts-0.1.33.tgz#25d68b5ebd49c5925cf6e4766e4d051fccf2e86e"
+  integrity sha512-ANsAznVkdnaV1EhZcbE3wcEOWbJSX7YOs3Cka1gOPzMDVibNQ6mm8zgju26R1qSAKWBNNGbDZy5BmtZ6pQ8peA==
+
 kind-of@^6.0.2:
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
@@ -9475,6 +9480,13 @@ react-is@^18.0.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
 
+react-kakao-maps-sdk@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/react-kakao-maps-sdk/-/react-kakao-maps-sdk-1.1.5.tgz#e8027a56ce9da770769be0e5faee5442bffe01f9"
+  integrity sha512-NYL1ZwjwlcOwLDogw3jTB4b9JMlo5uVsJ6z7+jUXCYQMFoKlQfFuBQoh4zCeMADL28yy4yoa8BT4H4pSg79vwg==
+  dependencies:
+    kakao.maps.d.ts "^0.1.33"
+
 react-query@^3.39.2:
   version "3.39.2"
   resolved "https://registry.yarnpkg.com/react-query/-/react-query-3.39.2.tgz#9224140f0296f01e9664b78ed6e4f69a0cc9216f"
@@ -10472,6 +10484,11 @@ styled-components@^5.3.6:
     hoist-non-react-statics "^3.0.0"
     shallowequal "^1.1.0"
     supports-color "^5.5.0"
+
+styled-reset@^4.4.5:
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/styled-reset/-/styled-reset-4.4.5.tgz#8c4bf50ee4f53d104473b156d0697ff509d54405"
+  integrity sha512-uEQzbCqSBbx1ZT9VuquoGOJyVzs3kMIMCyjxmtSo4/JoTCrq92UFTJx91KcdMncDaymz6NE8sgSvstHHcJjExg==
 
 stylehacks@^5.1.1:
   version "5.1.1"

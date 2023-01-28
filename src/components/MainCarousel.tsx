@@ -3,22 +3,15 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import styled from 'styled-components';
-// import CarouselImg from './CarouselImg';
-// import { nanoid } from 'nanoid';
 
 const MainCarousel = () => {
   const mainImg01 = './image/mainVisual/mainVisual01.jpg';
   const mainImg02 = './image/mainVisual/mainVisual02.jpg';
   const mainImg03 = './image/mainVisual/mainVisual03.jpg';
 
-  //const mainImgArr = [mainImg01, mainImg02, mainImg03];
-
   return (
     <Wrapper>
       <StyledSlider {...settings}>
-        {/* {mainImgArr?.map((item: string) => (
-          <CarouselImg item={item} key={nanoid()} />
-        ))} */}
         <CarouselBox>
           <Img src={mainImg01} />
         </CarouselBox>

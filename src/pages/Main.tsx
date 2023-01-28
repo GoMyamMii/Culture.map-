@@ -5,12 +5,13 @@ import ListItem from '../components/ListItem';
 import MainCarousel from '../components/MainCarousel';
 import styled from 'styled-components';
 import { Fade } from 'react-reveal';
+import { nanoid } from 'nanoid';
 
 const Main = () => {
-  const [cityValue, setCityValue] = useState('11');
-  const [titleValue, setTitleValue] = useState('11');
-  const [submitCity, setSubmitCity] = useState('11');
-  const [submitTitle, setSubmitTitle] = useState('11');
+  const [cityValue, setCityValue] = useState('');
+  const [titleValue, setTitleValue] = useState('');
+  const [submitCity, setSubmitCity] = useState('');
+  const [submitTitle, setSubmitTitle] = useState('');
   const [pageNumber, setPageNumber] = useState('1');
 
   const { data: selectData, isLoading: selectLoading } = useQuery<any>(
@@ -20,7 +21,7 @@ const Main = () => {
 
   const itemListData = selectData?.mappedItemData;
   const pageIndexData = selectData?.pageData;
-  const page: number = Math.ceil(pageIndexData / 10);
+  const page: number = Math.ceil(pageIndexData / 16);
 
   const handleSearchBtnClick = (cityValue: string, titleValue: string) => {
     setSubmitCity(cityValue);
@@ -54,6 +55,7 @@ const Main = () => {
 
           <SelectWrap>
             <Select onChange={selectCity}>
+              <option value="">지역 전체</option>
               <option value="11">서울</option>
               <option value="21">부산</option>
               <option value="22">대구</option>
@@ -73,6 +75,7 @@ const Main = () => {
               <option value="50">제주</option>
             </Select>
             <Select onChange={selectTitle}>
+              <option value="">종목 전체</option>
               <option value="11">국보</option>
               <option value="12">보물</option>
               <option value="13">사적</option>
@@ -95,8 +98,14 @@ const Main = () => {
             >
               검색
             </SearchBtn>
-            <div>{itemListData[0][0].city}</div>
-            <div>{itemListData[0][0].title}</div>
+            <SelectTextContainer>
+              <SelectTextBox>
+                {submitCity ? itemListData[0][0].city : '전체 지역'} /&nbsp;
+              </SelectTextBox>
+              <SelectTextBox>
+                {submitTitle ? itemListData[0][0].title : '전체 종목'}
+              </SelectTextBox>
+            </SelectTextContainer>
           </SelectWrap>
           <MainContents>
             <Fade bottom>
@@ -106,12 +115,17 @@ const Main = () => {
                     <ListItem item={item} key={item.id} />
                   ))}
                 </List>
-
-                {pages.map((item) => (
-                  <button onClick={clickPageNumber} value={item}>
-                    {item}
-                  </button>
-                ))}
+                <PageNationBox>
+                  {pages.map((item) => (
+                    <button
+                      onClick={clickPageNumber}
+                      value={item}
+                      key={nanoid()}
+                    >
+                      {item}
+                    </button>
+                  ))}
+                </PageNationBox>
               </ListBox>
             </Fade>
           </MainContents>
@@ -124,6 +138,10 @@ const Main = () => {
 export default Main;
 
 const MainContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 font-family: 'Noto Sans KR', sans-serif;
   max-width: 100%;
 `;
@@ -135,30 +153,50 @@ const MainContents = styled.div`
 `;
 
 const SelectWrap = styled.div`
-  background-color: red;
   display: flex;
   width: 1440px;
-  margin: 0 auto;
+  margin: 20px 0;
 `;
 const Select = styled.select`
-  margin-right: 5px;
-  padding-left: 5px;
-  width: 100px;
-  height: 20px;
-  border-radius: 20px;
-  border: none;
-  background-color: #b5b5b5;
+  margin-right: 10px;
+  padding: 10px;
+  width: 200px;
+  height: 40px;
+
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+
+  border-radius: 10px;
+  border: 1px solid black;
 `;
 
 const SearchBtn = styled.button`
-  width: 100px;
-  height: 20px;
-  border-radius: 20px;
+  width: 200px;
+  height: 40px;
+
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+
+  border-radius: 10px;
   border: none;
-  background-color: #666;
+  background-color: #242c44;
   color: white;
-  padding-left: 5px;
   cursor: pointer;
+`;
+
+const SelectTextContainer = styled.div`
+  display: flex;
+  margin-left: 20px;
+`;
+
+const SelectTextBox = styled.div`
+  height: 40px;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 600;
 `;
 
 const ListBox = styled.div`
@@ -170,8 +208,14 @@ const ListBox = styled.div`
 
 const List = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
-  width: 1440px;
+  width: 100%;
   height: auto;
+`;
+
+const PageNationBox = styled.div`
+  display: flex;
+  width: 1440px;
+  overflow-x: auto;
 `;

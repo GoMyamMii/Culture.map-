@@ -38,6 +38,7 @@ const Main = () => {
   const page: number = Math.ceil(pageIndexData / 16);
 
   const handleSearchBtnClick = (cityValue: string, titleValue: string) => {
+    setPageNumber('1');
     setSubmitCity(cityValue);
     setSubmitTitle(titleValue);
   };
@@ -61,16 +62,13 @@ const Main = () => {
     countMutate();
   }, []);
 
-  if (selectLoading) {
-    return <div>로딩중입니다.</div>;
-  }
-
   return (
     <MainContainer>
-      {selectLoading ? null : (
+      <MainCarousel />
+      {selectLoading ? (
+        <LoadingWrap>로딩중입니다.</LoadingWrap>
+      ) : (
         <>
-          <MainCarousel />
-
           <SelectWrap>
             <Select onChange={selectCity}>
               <option value="">지역 전체</option>
@@ -118,7 +116,8 @@ const Main = () => {
             </SearchBtn>
             <SelectTextContainer>
               <SelectTextBox>
-                {submitCity ? itemListData[0][0].city : '전체 지역'} /&nbsp;
+                {submitCity ? itemListData[0][0].city : '전체 지역'}
+                /&nbsp;
               </SelectTextBox>
               <SelectTextBox>
                 {submitTitle ? itemListData[0][0].title : '전체 종목'}
@@ -133,6 +132,9 @@ const Main = () => {
                     <ListItem item={item} key={item.id} />
                   ))}
                 </List>
+                <CurrentTotalPage>
+                  {pageNumber}/{pages.slice(-1)}
+                </CurrentTotalPage>
                 <PageNationBox>
                   {pages.map((item) => (
                     <button
@@ -162,6 +164,12 @@ const MainContainer = styled.div`
   align-items: center;
   font-family: 'Noto Sans KR', sans-serif;
   max-width: 100%;
+`;
+const LoadingWrap = styled.div`
+  width: 100vh;
+  height: 500px;
+  text-align: center;
+  padding-top: 30px;
 `;
 const MainContents = styled.div`
   display: flex;
@@ -231,7 +239,9 @@ const List = styled.div`
   width: 100%;
   height: auto;
 `;
-
+const CurrentTotalPage = styled.div`
+  text-align: center;
+`;
 const PageNationBox = styled.div`
   display: flex;
   width: 1440px;

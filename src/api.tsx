@@ -23,7 +23,7 @@ export const getSearchData = async ({ queryKey }: any) => {
   let data;
   await axios
     .get(
-      `${BASE_URL}ccbaCtcd=${cityValue}&ccbaKdcd=${titleValue}&pageIndex=${pageNumber}`
+      `${BASE_URL}ccbaCtcd=${cityValue}&ccbaKdcd=${titleValue}&pageIndex=${pageNumber}&pageUnit=16`
     )
     .then((response) => {
       const responseData = new XMLParser().parseFromString(

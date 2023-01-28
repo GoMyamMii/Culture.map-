@@ -4,6 +4,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import styled from 'styled-components';
 import CarouselImg from './CarouselImg';
+import { nanoid } from 'nanoid';
 
 const MainCarousel = () => {
   const mainImg01 = './image/mainVisual/mainVisual01.jpg';
@@ -16,7 +17,7 @@ const MainCarousel = () => {
     <Wrapper>
       <StyledSlider {...settings}>
         {mainImgArr?.map((item: string) => (
-          <CarouselImg item={item} />
+          <CarouselImg item={item} key={nanoid()} />
         ))}
       </StyledSlider>
     </Wrapper>
@@ -33,20 +34,28 @@ const settings = {
   slidesToScroll: 1,
   centerPadding: '0px',
   centerMode: true,
-  arrows: true,
+  arrows: false,
 };
 
 const Wrapper = styled.div`
-  margin: 20px;
+  width: 100%;
+  max-width: 1920px;
+  margin-bottom: 20px;
   display: flex;
   justify-content: center;
+  flex-direction: row;
 `;
 
 const StyledSlider = styled(Slider)`
   width: 100%;
-
   max-width: 1920px;
   height: 550px;
+  .slick-dots {
+    bottom: 20px;
+  }
+  .slick-dots li button::before {
+    color: white;
+  }
 `;
 
 export default MainCarousel;

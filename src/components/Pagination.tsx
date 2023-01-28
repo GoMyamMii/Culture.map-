@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 function Pagination(props: any) {
@@ -10,6 +10,9 @@ function Pagination(props: any) {
   const numPages = Math.ceil(16736 / limit);
   // 16736은 전체페이지수이긴 하나, total로 가져오려고 하니 total이 빈배열로
   // 나와서 어쩔수 없이 16736으로 표기
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>

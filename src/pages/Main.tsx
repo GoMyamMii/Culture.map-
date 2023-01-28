@@ -138,9 +138,10 @@ const Main = () => {
                   {pageNumber}/{pages.slice(-1)}
                 </CurrentTotalPage>
 
+                {/* 페이지네이션 컴포넌트 */}
                 <Pagination
                   limit={limit} // 현재 한페이지에 표시되는 글개수
-                  total={pages} // 현재 모든페이지 수
+                  total={pages} // 현재 모든페이지 수(그러나 빈배열로나옴)
                   page={pageNumber} // 페이지번호
                   setPage={setPageNumber}
                 />

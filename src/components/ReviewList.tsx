@@ -49,35 +49,29 @@ const ReviewList = ({
   return (
     <div>
       <Form onSubmit={submitReview}>
-        <div>
-          <NameInput
-            maxLength={10}
-            onChange={onChangeName}
-            value={name}
-            placeholder="닉네임"
-            required
-          />
-          <PasswordInput
-            maxLength={8}
-            onChange={onPasswordName}
-            value={password}
-            type="password"
-            placeholder="비밀번호"
-            required
-          />
-        </div>
-        <div>
-          <BodyInput
-            maxLength={48}
-            onChange={onBodyName}
-            value={body}
-            placeholder="내용 (최대 48자)"
-            required
-          />
-        </div>
-        <div>
-          <button>작성</button>
-        </div>
+        <NameInput
+          maxLength={10}
+          onChange={onChangeName}
+          value={name}
+          placeholder="닉네임"
+          required
+        />
+        <PasswordInput
+          maxLength={8}
+          onChange={onPasswordName}
+          value={password}
+          type="password"
+          placeholder="비밀번호"
+          required
+        />
+        <BodyInput
+          maxLength={48}
+          onChange={onBodyName}
+          value={body}
+          placeholder="내용 (최대 48자)"
+          required
+        />
+        <ReviewBtn>작성</ReviewBtn>
       </Form>
       {itemData?.map((item: reviewType) => (
         <ReviewItem key={item.id} item={item} />
@@ -90,14 +84,14 @@ export default ReviewList;
 
 const Form = styled.form`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: auto;
 `;
 
 const NameInput = styled.input`
-  width: 80px;
-  height: 20px;
+  width: 100px;
+  height: 25px;
   margin: 5px;
   text-align: center;
   background-color: #cdcdcd;
@@ -107,8 +101,8 @@ const NameInput = styled.input`
 `;
 
 const PasswordInput = styled.input`
-  width: 80px;
-  height: 20px;
+  width: 100px;
+  height: 25px;
   margin: 5px;
   text-align: center;
   background-color: #cdcdcd;
@@ -118,12 +112,24 @@ const PasswordInput = styled.input`
 `;
 
 const BodyInput = styled.input`
-  width: 200px;
-  height: 20px;
+  width: 250px;
+  height: 25px;
   margin: 5px;
   text-align: center;
   background-color: #cdcdcd;
   color: white;
   border: none;
   border-radius: 15px;
+`;
+
+const ReviewBtn = styled.button`
+  height: 28px;
+  border-radius: 5px;
+  background-color: #242c44;
+  color: white;
+  border: none;
+  margin: 7px;
+  &:hover {
+    transform: scale(1.2);
+  }
 `;

@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import Modal from './Modal';
+import { BiUser } from 'react-icons/bi';
+import { FiTrash2 } from 'react-icons/fi';
 
 function ReviewItem({ item }: { item: reviewType }) {
   const [deleteToggle, setDeleteToggle] = useState(false);
@@ -17,9 +19,14 @@ function ReviewItem({ item }: { item: reviewType }) {
         <div></div>
       )}
       <Wrap>
-        <NameDiv>닉네임 : {item?.name}</NameDiv>
-        <BodyDiv>내용 : {item?.body}</BodyDiv>
-        <button onClick={removeModal}>삭제</button>
+        <NameDiv>
+          <BiUser />
+          &nbsp; {item?.name}
+        </NameDiv>
+        <BodyDiv>{item?.body}</BodyDiv>
+        <DeleteBtn onClick={removeModal}>
+          <FiTrash2 size="15" />
+        </DeleteBtn>
       </Wrap>
     </div>
   );
@@ -28,12 +35,26 @@ function ReviewItem({ item }: { item: reviewType }) {
 export default ReviewItem;
 
 const Wrap = styled.div`
-  width: 300px;
-  margin: 20px;
+  width: 700px;
+  margin: 25px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  background-color: #efefef84;
 `;
-const NameDiv = styled.div``;
-const BodyDiv = styled.div``;
+const NameDiv = styled.div`
+  margin: 10px;
+`;
+
+const BodyDiv = styled.div`
+  margin: 10px;
+`;
+
+const DeleteBtn = styled.button`
+  margin: 10px;
+  border: none;
+  background-color: #efefef84;
+  &:hover {
+    transform: scale(1.2);
+  }
+`;

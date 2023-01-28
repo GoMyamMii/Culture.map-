@@ -1,11 +1,8 @@
 import styled from 'styled-components';
 
-function Pagination(
-  { total }: any,
-  { limit }: any,
-  { page }: any,
-  { setPage }: any
-) {
+function Pagination(props: any) {
+  const { total, limit, page, setPage } = props;
+
   const numPages = Math.ceil(total / limit);
   const pages = Array.from({ length: numPages }, (_, i) => i + 1);
 
@@ -19,11 +16,11 @@ function Pagination(
           <Button
             key={i + 1}
             onClick={() => setPage(i + 1)}
-            aria-current={true}
+            aria-current={'page'}
             // aria-current={page === i + 1 ? "page" : null}
             //원래 이렇게 작성하려고 했으나, Button에서 aria-current를 오버로드 할 수 없다고 하여 임시로 위의 코드로 작성
           >
-            {i + 1}
+            {i + 1 + 1312412}
           </Button>
         ))}
         <Button onClick={() => setPage(page + 1)} disabled={page === numPages}>

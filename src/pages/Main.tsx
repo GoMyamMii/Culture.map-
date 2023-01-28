@@ -6,6 +6,7 @@ import MainCarousel from '../components/MainCarousel';
 import styled from 'styled-components';
 import { Fade } from 'react-reveal';
 import { nanoid } from 'nanoid';
+import Pagination from '../components/Pagination';
 
 const Main = () => {
   const [cityValue, setCityValue] = useState('');
@@ -13,6 +14,7 @@ const Main = () => {
   const [submitCity, setSubmitCity] = useState('');
   const [submitTitle, setSubmitTitle] = useState('');
   const [pageNumber, setPageNumber] = useState('1');
+  const [limit, setLimit] = useState(16);
 
   const queryClient = useQueryClient();
 
@@ -135,8 +137,14 @@ const Main = () => {
                 <CurrentTotalPage>
                   {pageNumber}/{pages.slice(-1)}
                 </CurrentTotalPage>
-                <PageNationBox>
-                  {pages.map((item) => (
+
+                <Pagination
+                  limit={limit} // 현재 한페이지에 표시되는 글개수
+                  total={pages} // 현재 모든페이지 수
+                  page={pageNumber} // 페이지번호
+                  setPage={setPageNumber}
+                />
+                {/* {pages.map((item) => (
                     <button
                       onClick={clickPageNumber}
                       value={item}
@@ -144,8 +152,7 @@ const Main = () => {
                     >
                       {item}
                     </button>
-                  ))}
-                </PageNationBox>
+                  ))} */}
               </ListBox>
             </Fade>
           </MainContents>
@@ -241,9 +248,4 @@ const List = styled.div`
 `;
 const CurrentTotalPage = styled.div`
   text-align: center;
-`;
-const PageNationBox = styled.div`
-  display: flex;
-  width: 1440px;
-  overflow-x: auto;
 `;

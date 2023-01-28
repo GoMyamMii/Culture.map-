@@ -4,9 +4,12 @@ import {
   collection,
   deleteDoc,
   doc,
+  getDoc,
   getDocs,
   orderBy,
   query,
+  updateDoc,
+  increment,
 } from 'firebase/firestore';
 //@ts-ignore <- 이거하면 밑에줄 코드(1줄) 자바스크립트로 인식함
 import XMLParser from 'react-xml-parser';
@@ -102,4 +105,14 @@ export const readReview = async () => {
 
 export const deleteReview = async (item: reviewType) => {
   deleteDoc(doc(dbService, `reviews/${item.id}`));
+};
+
+export const todayVisit = async () => {
+  return await getDoc(doc(dbService, 'counter', 'visit'));
+};
+
+export const todayCounter = async () => {
+  await updateDoc(doc(dbService, 'counter/visit'), {
+    count: increment(1),
+  });
 };

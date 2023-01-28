@@ -1,6 +1,6 @@
-import { useQuery } from 'react-query';
-import { getSearchData } from '../api';
-import React, { useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { getSearchData, todayCounter, todayVisit } from '../api';
+import React, { useEffect, useState } from 'react';
 import ListItem from '../components/ListItem';
 import MainCarousel from '../components/MainCarousel';
 import styled from 'styled-components';
@@ -14,9 +14,23 @@ const Main = () => {
   const [submitTitle, setSubmitTitle] = useState('');
   const [pageNumber, setPageNumber] = useState('1');
 
+  const queryClient = useQueryClient();
+
   const { data: selectData, isLoading: selectLoading } = useQuery<any>(
     ['searchData', submitCity, submitTitle, pageNumber],
     getSearchData
+  );
+  const { isLoading: editLoading, mutate: countMutate } = useMutation(
+    todayCounter,
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('visitData');
+      },
+    }
+  );
+  const { data: visitData, isLoading: visitLoading } = useQuery(
+    'visitData',
+    todayVisit
   );
 
   const itemListData = selectData?.mappedItemData;
@@ -24,6 +38,7 @@ const Main = () => {
   const page: number = Math.ceil(pageIndexData / 16);
 
   const handleSearchBtnClick = (cityValue: string, titleValue: string) => {
+    setPageNumber('1');
     setSubmitCity(cityValue);
     setSubmitTitle(titleValue);
   };
@@ -43,16 +58,17 @@ const Main = () => {
     pages.push(i);
   }
 
-  if (selectLoading) {
-    return <div>로딩중입니다.</div>;
-  }
+  useEffect(() => {
+    countMutate();
+  }, []);
 
   return (
     <MainContainer>
-      {selectLoading ? null : (
+      <MainCarousel />
+      {selectLoading ? (
+        <LoadingWrap>로딩중입니다.</LoadingWrap>
+      ) : (
         <>
-          <MainCarousel />
-
           <SelectWrap>
             <Select onChange={selectCity}>
               <option value="">지역 전체</option>
@@ -100,7 +116,8 @@ const Main = () => {
             </SearchBtn>
             <SelectTextContainer>
               <SelectTextBox>
-                {submitCity ? itemListData[0][0].city : '전체 지역'} /&nbsp;
+                {submitCity ? itemListData[0][0].city : '전체 지역'}
+                /&nbsp;
               </SelectTextBox>
               <SelectTextBox>
                 {submitTitle ? itemListData[0][0].title : '전체 종목'}
@@ -115,6 +132,9 @@ const Main = () => {
                     <ListItem item={item} key={item.id} />
                   ))}
                 </List>
+                <CurrentTotalPage>
+                  {pageNumber}/{pages.slice(-1)}
+                </CurrentTotalPage>
                 <PageNationBox>
                   {pages.map((item) => (
                     <button
@@ -142,8 +162,14 @@ const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   max-width: 100%;
+`;
+const LoadingWrap = styled.div`
+  width: 100vh;
+  height: 500px;
+  text-align: center;
+  padding-top: 30px;
 `;
 const MainContents = styled.div`
   display: flex;
@@ -213,7 +239,9 @@ const List = styled.div`
   width: 100%;
   height: auto;
 `;
-
+const CurrentTotalPage = styled.div`
+  text-align: center;
+`;
 const PageNationBox = styled.div`
   display: flex;
   width: 1440px;

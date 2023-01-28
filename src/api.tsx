@@ -107,7 +107,7 @@ export const deleteReview = async (item: reviewType) => {
   deleteDoc(doc(dbService, `reviews/${item.id}`));
 };
 
-export const todayVisit = async () => {
+export const totalVisit = async () => {
   return await getDoc(doc(dbService, 'counter', 'visit'));
 };
 

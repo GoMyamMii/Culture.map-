@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 function Pagination(props: any) {
-  const { total, limit, page, setPage } = props;
+  const { total, page, setPage } = props;
   const [currPage, setCurrPage] = useState(page);
   let firstNum = currPage - (currPage % 5) + 1;
   let lastNum = currPage - (currPage % 5) + 5;
 
-  const numPages = Math.ceil(16736 / limit);
+  const numPages = Math.ceil(total / 16);
   // 16736은 전체페이지수이긴 하나, total로 가져오려고 하니 total이 빈배열로
   // 나와서 어쩔수 없이 16736으로 표기
   useEffect(() => {
@@ -19,10 +19,10 @@ function Pagination(props: any) {
       <Nav>
         <Button
           onClick={() => {
-            setPage(page - 1);
-            setCurrPage(page - 2);
+            setPage(Number(page) - 1);
+            setCurrPage(Number(page) - 2);
           }}
-          disabled={page === 1}
+          disabled={page == 1}
         >
           &lt;
         </Button>
@@ -80,7 +80,7 @@ function Pagination(props: any) {
 
         <Button
           onClick={() => {
-            setPage(page + 1);
+            setPage(Number(page) + 1);
             setCurrPage(page);
           }}
           disabled={page === numPages}

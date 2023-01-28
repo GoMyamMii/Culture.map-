@@ -1,6 +1,6 @@
-import { useQuery } from 'react-query';
-import { getSearchData } from '../api';
-import React, { useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { getSearchData, todayCounter, todayVisit } from '../api';
+import React, { useEffect, useState } from 'react';
 import ListItem from '../components/ListItem';
 import MainCarousel from '../components/MainCarousel';
 import styled from 'styled-components';
@@ -14,9 +14,23 @@ const Main = () => {
   const [submitTitle, setSubmitTitle] = useState('');
   const [pageNumber, setPageNumber] = useState('1');
 
+  const queryClient = useQueryClient();
+
   const { data: selectData, isLoading: selectLoading } = useQuery<any>(
     ['searchData', submitCity, submitTitle, pageNumber],
     getSearchData
+  );
+  const { isLoading: editLoading, mutate: countMutate } = useMutation(
+    todayCounter,
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('visitData');
+      },
+    }
+  );
+  const { data: visitData, isLoading: visitLoading } = useQuery(
+    'visitData',
+    todayVisit
   );
 
   const itemListData = selectData?.mappedItemData;
@@ -42,6 +56,10 @@ const Main = () => {
   for (let i = 1; i < page + 1; i++) {
     pages.push(i);
   }
+
+  useEffect(() => {
+    countMutate();
+  }, []);
 
   if (selectLoading) {
     return <div>로딩중입니다.</div>;
@@ -142,7 +160,7 @@ const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   max-width: 100%;
 `;
 const MainContents = styled.div`

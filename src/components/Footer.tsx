@@ -1,11 +1,11 @@
 import { useQuery } from 'react-query';
 import styled from 'styled-components';
-import { todayVisit } from '../api';
+import { totalVisit } from '../api';
 
 export default function Footer() {
   const { data: visitData, isLoading: visitLoading } = useQuery(
     'visitData',
-    todayVisit
+    totalVisit
   );
   return (
     <FooterBox>

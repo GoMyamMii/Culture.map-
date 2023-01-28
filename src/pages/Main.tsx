@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { getSearchData, todayCounter, todayVisit } from '../api';
+import { getSearchData, todayCounter, totalVisit } from '../api';
 import React, { useEffect, useState } from 'react';
 import ListItem from '../components/ListItem';
 import MainCarousel from '../components/MainCarousel';
@@ -29,10 +29,6 @@ const Main = () => {
         queryClient.invalidateQueries('visitData');
       },
     }
-  );
-  const { data: visitData, isLoading: visitLoading } = useQuery(
-    'visitData',
-    todayVisit
   );
 
   const itemListData = selectData?.mappedItemData;

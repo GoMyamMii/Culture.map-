@@ -71,7 +71,7 @@ const Detail = () => {
 
       <Fade duration={1000} delay={1400}>
         <Ccontainer>
-          <MapKakao lat={lat} lng={long} />
+          <MapKakao lat={lat} lng={long} title={name} />
         </Ccontainer>
       </Fade>
       <ReviewListWrap>

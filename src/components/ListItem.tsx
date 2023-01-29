@@ -57,7 +57,7 @@ export default ListItem;
 
 const ItemContainer = styled.div`
   display: flex;
-  width: 700px;
+  width: 460px;
   height: 700px;
   margin: 20px 0;
 `;
@@ -66,7 +66,7 @@ const ItemTopWrap = styled.div<ItemTopWrapProps>`
   background-position: center;
   background-size: cover;
   height: 500px;
-  width: 700px;
+  width: 460px;
   background-image: ${(props) =>
     props.image !== ''
       ? `linear-gradient(#000000d1, #0000008b), url(${props.image})`
@@ -91,22 +91,28 @@ const NameGeneWarp = styled.div`
 
 const TopName = styled.div`
   writing-mode: vertical-rl;
-  text-orientation: upright;
+  /* text-orientation: upright; */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 
   font-size: 48px;
+  font-weight: 600;
+  letter-spacing: 4px;
   margin: 40px 40px 40px 0;
 `;
 const TopGene = styled.div`
   writing-mode: vertical-rl;
-  text-orientation: upright;
+  /* text-orientation: upright; */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 24px;
+
+  font-size: 32px;
+  letter-spacing: 2px;
+
   margin-top: 40px;
+  margin-right: 16px;
 `;
 
 const ContentBody = styled.div`
@@ -120,6 +126,7 @@ const ContentText = styled.span`
   font-weight: 100;
   line-height: 30px;
   color: white;
+  text-align: justify;
 
   overflow: hidden;
   text-overflow: ellipsis;

@@ -9,8 +9,10 @@ export default function Footer() {
   );
   return (
     <FooterBox>
-      <div>Culture.map() | Soon`s Children | 내일배움캠프</div>
-      <div>총 방문자 수 : {visitData?.data()?.count}명</div>
+      <ContentBox>
+        <div>Culture.map() | Soon`s Children | 내일배움캠프</div>
+        <div>총 방문자 수 : {visitData?.data()?.count}명</div>
+      </ContentBox>
     </FooterBox>
   );
 }
@@ -21,6 +23,14 @@ const FooterBox = styled.div`
   color: white;
   height: 90px;
   padding: 0 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ContentBox = styled.div`
+  width: 1440px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

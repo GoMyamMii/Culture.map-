@@ -71,9 +71,10 @@ const Detail = () => {
 
       <Fade duration={1000} delay={1400}>
         <Ccontainer>
-          <MapKakao lat={lat} lng={long} />
+          <MapKakao lat={lat} lng={long} title={name} />
         </Ccontainer>
       </Fade>
+
       <ReviewListWrap>
         <Fade duration={1000} delay={1500}>
           <ReviewButton
@@ -94,9 +95,11 @@ export default Detail;
 
 const Container = styled.div`
   font-family: 'Noto Sans KR', sans-serif;
-  margin-inline: 100px;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  width: 1440px;
+  margin: 30px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Acontainer = styled.div`
@@ -104,6 +107,7 @@ const Acontainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  width: 1440px;
 `;
 
 const A1container = styled.div``;
@@ -132,13 +136,21 @@ const SubName = styled.div`
   font-size: 20px;
   font-weight: 500;
   margin-bottom: 5px;
+  font-size: 24px;
+  line-height: 30px;
 `;
 
 const Bcontainer = styled.div`
   margin-top: 50px;
+  font-size: 18px;
+  line-height: 28px;
 `;
 const Ccontainer = styled.div`
   margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 1440px;
 `;
 const ReviewListWrap = styled.div`
   display: flex;

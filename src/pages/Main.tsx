@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { getSearchData, todayCounter, todayVisit } from '../api';
+import { getSearchData, todayCounter, totalVisit } from '../api';
 import React, { useEffect, useState } from 'react';
 import ListItem from '../components/ListItem';
 import MainCarousel from '../components/MainCarousel';
@@ -14,7 +14,6 @@ const Main = () => {
   const [submitCity, setSubmitCity] = useState('');
   const [submitTitle, setSubmitTitle] = useState('');
   const [pageNumber, setPageNumber] = useState('1');
-  const [limit, setLimit] = useState(16);
 
   const queryClient = useQueryClient();
 
@@ -29,10 +28,6 @@ const Main = () => {
         queryClient.invalidateQueries('visitData');
       },
     }
-  );
-  const { data: visitData, isLoading: visitLoading } = useQuery(
-    'visitData',
-    todayVisit
   );
 
   const itemListData = selectData?.mappedItemData;
@@ -137,23 +132,11 @@ const Main = () => {
                 <CurrentTotalPage>
                   {pageNumber}/{pages.slice(-1)}
                 </CurrentTotalPage>
-
-                {/* 페이지네이션 컴포넌트 */}
                 <Pagination
-                  limit={limit} // 현재 한페이지에 표시되는 글개수
-                  total={pages} // 현재 모든페이지 수(그러나 빈배열로나옴)
+                  total={page} // 현재 모든페이지 수
                   page={pageNumber} // 페이지번호
                   setPage={setPageNumber}
                 />
-                {/* {pages.map((item) => (
-                    <button
-                      onClick={clickPageNumber}
-                      value={item}
-                      key={nanoid()}
-                    >
-                      {item}
-                    </button>
-                  ))} */}
               </ListBox>
             </Fade>
           </MainContents>

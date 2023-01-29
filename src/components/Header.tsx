@@ -1,10 +1,20 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function Header() {
+  const navigate = useNavigate();
   return (
     <HeaderContainer>
-      <ProjectName>Culture.map()</ProjectName>
-      <TeamName>순이와 아이들</TeamName>
+      <HeaderContents>
+        <ProjectName
+          onClick={() => {
+            navigate('/');
+          }}
+        >
+          Culture.map()
+        </ProjectName>
+        <TeamName>순이와 아이들</TeamName>
+      </HeaderContents>
     </HeaderContainer>
   );
 }
@@ -13,7 +23,14 @@ const HeaderContainer = styled.div`
   font-family: 'Gugi', cursive;
   background-color: #242c44;
   color: white;
-  height: 50px;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+const HeaderContents = styled.div`
+  max-width: 1920px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -21,6 +38,7 @@ const HeaderContainer = styled.div`
 `;
 const ProjectName = styled.div`
   font-size: 25px;
+  cursor: pointer;
 `;
 const TeamName = styled.div`
   font-size: 15px;

@@ -4,6 +4,10 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import styled from 'styled-components';
 
+interface ImgBoxProps {
+  mainImg: string;
+}
+
 const MainCarousel = () => {
   const mainImg01 = './image/mainVisual/mainVisual01.jpg';
   const mainImg02 = './image/mainVisual/mainVisual02.jpg';
@@ -13,13 +17,43 @@ const MainCarousel = () => {
     <Wrapper>
       <StyledSlider {...settings}>
         <CarouselBox>
-          <Img src={mainImg01} />
+          <ImgBox mainImg={mainImg01}>
+            <Script>
+              <Title>천정문</Title>
+              <Generation>백제시대</Generation>
+              <Contents>사비성을 재현해놓은 사비궁의 중남문</Contents>
+            </Script>
+          </ImgBox>
         </CarouselBox>
         <CarouselBox>
-          <Img src={mainImg02} />
+          <ImgBox mainImg={mainImg02}>
+            <Script>
+              <Title>경복궁 경회루</Title>
+              <Generation>조선시대</Generation>
+              <Contents>
+                1985년 국보로 지정되었다.정면 7칸, 측면 5칸의 중층(重層)
+                팔작지붕건물.
+                <br />
+                근정전 서북쪽에 있는 방형 연못 안에 세운 이 건물은 나라의 경사가
+                있을 때 연회를 베풀기 위한 곳이었다.
+              </Contents>
+            </Script>
+          </ImgBox>
         </CarouselBox>
         <CarouselBox>
-          <Img src={mainImg03} />
+          <ImgBox mainImg={mainImg03}>
+            <Script>
+              <Title>사물놀이</Title>
+              <Generation>1978 년 ~</Generation>
+              <Contents>
+                사물놀이는 사물(四物), 꽹과리 · 장구 · 북 · 징의 네 가지 악기
+                놀이[연주]라는 의미이다.
+                <br />
+                사물놀이는 야외에서 이루어지는 대규모 구성의 풍물놀이를 1978년
+                무대예술로 각색한 것이다.
+              </Contents>
+            </Script>
+          </ImgBox>
         </CarouselBox>
       </StyledSlider>
     </Wrapper>
@@ -65,10 +99,36 @@ const CarouselBox = styled.div`
   display: flex;
 `;
 
-const Img = styled.img`
+const ImgBox = styled.div<ImgBoxProps>`
   width: 100%;
   height: 550px;
   margin: 0 auto;
+  background-image: ${(props) => `url(${props.mainImg})`};
+`;
+
+const Script = styled.div`
+  width: 1440px;
+  margin: 0 auto;
+  padding-top: 120px;
+`;
+
+const Title = styled.p`
+  font-size: 48px;
+  color: white;
+  margin-bottom: 16px;
+  font-weight: 600;
+`;
+
+const Generation = styled.p`
+  color: #eee;
+  font-size: 32px;
+  margin-bottom: 40px;
+`;
+
+const Contents = styled.p`
+  color: #ddd;
+  font-size: 24px;
+  line-height: 32px;
 `;
 
 export default MainCarousel;

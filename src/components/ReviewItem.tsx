@@ -12,48 +12,75 @@ function ReviewItem({ item }: { item: reviewType }) {
   };
 
   return (
-    <div>
-      {deleteToggle ? (
-        <Modal item={item} setDeleteToggle={setDeleteToggle} />
-      ) : (
-        <div></div>
-      )}
-      <Wrap>
-        <NameDiv>
-          <BiUser />
-          &nbsp; {item?.name}
-        </NameDiv>
-        <BodyDiv>{item?.body}</BodyDiv>
+    <Wrap>
+      <Container>
+        {deleteToggle ? (
+          <Modal item={item} setDeleteToggle={setDeleteToggle} />
+        ) : (
+          <></>
+        )}
+        <ContentBox>
+          <NameDiv>
+            <BiUser size="24" />
+            &nbsp; {item?.name}
+          </NameDiv>
+          <BodyDiv>{item?.body}</BodyDiv>
+        </ContentBox>
+
         <DeleteBtn onClick={removeModal}>
-          <FiTrash2 size="15" />
+          <FiTrash2 size="24" />
         </DeleteBtn>
-      </Wrap>
-    </div>
+      </Container>
+    </Wrap>
   );
 }
 
 export default ReviewItem;
 
 const Wrap = styled.div`
-  width: 700px;
-  margin: 25px;
+  margin-top: 20px;
+`;
+
+const Container = styled.div`
+  width: 1400px;
+  height: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #efefef84;
+  padding: 0 20px;
+
+  border-radius: 10px;
+
+  background-color: #eee;
+  margin-bottom: 20px;
 `;
+
+const ContentBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+`;
+
 const NameDiv = styled.div`
   margin: 10px;
+  width: 200px;
+  font-size: 18px;
+  border-right: 1px solid #333;
+  display: flex;
+  align-items: center;
 `;
 
 const BodyDiv = styled.div`
   margin: 10px;
+  font-size: 18px;
 `;
 
 const DeleteBtn = styled.button`
   margin: 10px;
   border: none;
-  background-color: #efefef84;
+  background-color: #ffffff00;
+  cursor: pointer;
   &:hover {
     transform: scale(1.2);
   }

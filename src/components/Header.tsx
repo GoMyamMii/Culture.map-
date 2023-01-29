@@ -30,7 +30,7 @@ const HeaderContainer = styled.div`
   align-items: center;
 `;
 const HeaderContents = styled.div`
-  width: 1920px;
+  width: 1440px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

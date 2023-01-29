@@ -13,7 +13,7 @@ const Main = () => {
   const [titleValue, setTitleValue] = useState('');
   const [submitCity, setSubmitCity] = useState('');
   const [submitTitle, setSubmitTitle] = useState('');
-  const [pageNumber, setPageNumber] = useState('1');
+  const [pageNumber, setPageNumber] = useState(1);
 
   const queryClient = useQueryClient();
 
@@ -35,7 +35,7 @@ const Main = () => {
   const page: number = Math.ceil(pageIndexData / 16);
 
   const handleSearchBtnClick = (cityValue: string, titleValue: string) => {
-    setPageNumber('1');
+    setPageNumber(1);
     setSubmitCity(cityValue);
     setSubmitTitle(titleValue);
   };
@@ -47,9 +47,6 @@ const Main = () => {
     setTitleValue(event.target.value);
   };
 
-  const clickPageNumber = (event: React.MouseEvent) => {
-    setPageNumber((event.target as HTMLInputElement).value);
-  };
   const pages = [];
   for (let i = 1; i < page + 1; i++) {
     pages.push(i);

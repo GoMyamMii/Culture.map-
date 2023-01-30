@@ -29,7 +29,12 @@ function Pagination(props: any) {
           &lt;
         </Button>
 
-        <Button onClick={() => setPage(firstNum)} aria-current={'page'}>
+        <Button
+          onClick={() => setPage(firstNum)}
+          //@ts-ignore
+          border="true"
+          aria-current={page === firstNum ? 'page' : null}
+        >
           {firstNum}
         </Button>
 
@@ -42,7 +47,9 @@ function Pagination(props: any) {
                 onClick={() => {
                   setPage(firstNum + 1 + i);
                 }}
-                aria-current={'page'}
+                //@ts-ignore
+                border="true"
+                aria-current={page === firstNum + 1 + i ? 'page' : null}
               >
                 {firstNum + 1 + i}
               </Button>
@@ -52,7 +59,9 @@ function Pagination(props: any) {
               <Button
                 key={i + 1}
                 onClick={() => setPage(lastNum)}
-                aria-current={'page'}
+                //@ts-ignore
+                border="true"
+                aria-current={page === lastNum ? 'page' : null}
               >
                 {lastNum}
               </Button>
@@ -106,6 +115,7 @@ const Button = styled.button`
   }
 
   &[aria-current] {
+    background: tomato;
     font-weight: bold;
     cursor: pointer;
     transform: revert;

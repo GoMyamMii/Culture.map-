@@ -76,16 +76,14 @@ const Detail = () => {
       </Fade>
 
       <ReviewListWrap>
-        <Fade duration={1000} delay={1500}>
-          <ReviewButton
-            onClick={() => {
-              setToggle(!toggle);
-            }}
-          >
-            {toggle ? '리뷰닫기' : '리뷰보기'}
-          </ReviewButton>
-          {toggle ? <ReviewList itemData={itemData} cultureId={id} /> : <></>}
-        </Fade>
+        <ReviewButton
+          onClick={() => {
+            setToggle(!toggle);
+          }}
+        >
+          {toggle ? '리뷰닫기' : '리뷰보기'}
+        </ReviewButton>
+        {toggle ? <ReviewList itemData={itemData} cultureId={id} /> : <></>}
       </ReviewListWrap>
     </Container>
   );

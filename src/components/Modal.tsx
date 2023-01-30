@@ -26,6 +26,9 @@ export default function Modal({
           setDeleteToggle(false);
         },
       });
+    } else if (password === '') {
+      alert('비밀번호를 입력하지 않으셨습니다.');
+      setDeleteToggle(false);
     } else {
       alert('비밀번호가 맞지 않습니다.');
       setDeleteToggle(false);
@@ -34,8 +37,9 @@ export default function Modal({
   return (
     <Wrap>
       <Box>
+        <CancelBtn onClick={() => setDeleteToggle(false)}>x</CancelBtn>
         <TitleText>정말 삭제하시겠습니까?</TitleText>
-        <Text>리뷰 비밀번호를 입력 후 엔터를 눌러주세요.</Text>
+        <Text>리뷰 비밀번호를 입력해주세요.</Text>
         <form onSubmit={removeReview}>
           <Input
             maxLength={8}
@@ -44,8 +48,8 @@ export default function Modal({
             placeholder="비밀번호"
           />
         </form>
-        <Button type="button" onClick={() => setDeleteToggle(false)}>
-          삭제 취소
+        <Button type="button" onClick={() => removeReview()}>
+          삭제
         </Button>
       </Box>
     </Wrap>
@@ -65,6 +69,7 @@ const Wrap = styled.div`
   background-color: #000000a2;
 `;
 const Box = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -73,6 +78,14 @@ const Box = styled.div`
   height: 200px;
   background-color: #242c44;
   border-radius: 20px;
+`;
+const CancelBtn = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  cursor: pointer;
+  color: white;
+  font-size: 22px;
 `;
 const TitleText = styled.div`
   font-size: 20px;

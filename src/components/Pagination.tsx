@@ -4,12 +4,14 @@ import styled from 'styled-components';
 function Pagination(props: any) {
   const { total, page, setPage } = props;
   const [currPage, setCurrPage] = useState(page);
+
+  // 페이지 리스트의 첫번째
   let firstNum = currPage - (currPage % 5) + 1;
+  // 페이지 리스트의 마지막
   let lastNum = currPage - (currPage % 5) + 5;
 
+  // 전체 페이지
   const numPages = Math.ceil(total / 18);
-  // 16736은 전체페이지수이긴 하나, total로 가져오려고 하니 total이 빈배열로
-  // 나와서 어쩔수 없이 16736으로 표기
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -27,34 +29,20 @@ function Pagination(props: any) {
           &lt;
         </Button>
 
-        <Button
-          // border="true"
-          // 원래는 css를 깔끔하게 주기 위해 border를 사용하려했으나
-          // Button컴포넌트에서 오버로드 오류가 나와서 제외했음
-          onClick={() => setPage(firstNum)}
-          aria-current={'page'}
-          // aria-current={page === lastNum ? "page" : null}>
-          // 원래는 현재 페이지를 가리키기위해 aria-current를 사용하려했으나
-          // Button컴포넌트에서 오버로드 오류가 나와서 'page'로대체함
-        >
+        <Button onClick={() => setPage(firstNum)} aria-current={'page'}>
           {firstNum}
         </Button>
 
+        {/* 첫번째, 마지막 페이지 사이의 페이지 */}
         {Array.from({ length: 4 }, (_, i) => i + 1).map((_, i) => {
           if (i <= 2) {
             return (
               <Button
-                // border="true"
-                // 원래는 css를 깔끔하게 주기 위해 border를 사용하려했으나
-                // Button컴포넌트에서 오버로드 오류가 나와서 제외했음
                 key={i + 1}
                 onClick={() => {
                   setPage(firstNum + 1 + i);
                 }}
                 aria-current={'page'}
-                // aria-current={page === lastNum ? "page" : null}>
-                // 원래는 현재 페이지를 가리키기위해 aria-current를 사용하려했으나
-                // Button컴포넌트에서 오버로드 오류가 나와서 'page'로대체함
               >
                 {firstNum + 1 + i}
               </Button>
@@ -62,15 +50,9 @@ function Pagination(props: any) {
           } else if (i >= 3) {
             return (
               <Button
-                // border="true"
-                // 원래는 css를 깔끔하게 주기 위해 border를 사용하려했으나
-                // Button컴포넌트에서 오버로드 오류가 나와서 제외했음
                 key={i + 1}
                 onClick={() => setPage(lastNum)}
                 aria-current={'page'}
-                // aria-current={page === lastNum ? "page" : null}>
-                // 원래는 현재 페이지를 가리키기위해 aria-current를 사용하려했으나
-                // Button컴포넌트에서 오버로드 오류가 나와서 'page'로대체함
               >
                 {lastNum}
               </Button>
@@ -125,7 +107,7 @@ const Button = styled.button`
 
   &[aria-current] {
     font-weight: bold;
-    cursor: revert;
+    cursor: pointer;
     transform: revert;
   }
 `;

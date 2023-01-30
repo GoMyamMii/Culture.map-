@@ -15,6 +15,7 @@ const MainCarousel = () => {
 
   return (
     <Wrapper>
+      {/* 라이브러리 컴포넌트를 사용 */}
       <StyledSlider {...settings}>
         <CarouselBox>
           <ImgBox mainImg={mainImg01}>

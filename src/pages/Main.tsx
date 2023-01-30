@@ -1,57 +1,61 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { getSearchData, todayCounter, totalVisit } from '../api';
+import { getSearchData, todayCounter } from '../api';
 import React, { useEffect, useState } from 'react';
 import ListItem from '../components/ListItem';
 import MainCarousel from '../components/MainCarousel';
 import styled from 'styled-components';
 import { Fade } from 'react-reveal';
-import { nanoid } from 'nanoid';
 import Pagination from '../components/Pagination';
 
 const Main = () => {
+  // 선택 state
   const [cityValue, setCityValue] = useState('');
   const [titleValue, setTitleValue] = useState('');
+  // 검색 state
   const [submitCity, setSubmitCity] = useState('');
   const [submitTitle, setSubmitTitle] = useState('');
+  // 현재 페이지 state
   const [pageNumber, setPageNumber] = useState(1);
 
   const queryClient = useQueryClient();
 
+  // api 데이터 받아오기
   const { data: selectData, isLoading: selectLoading } = useQuery<any>(
     ['searchData', submitCity, submitTitle, pageNumber],
     getSearchData
   );
-  const { isLoading: editLoading, mutate: countMutate } = useMutation(
-    todayCounter,
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries('visitData');
-      },
-    }
-  );
 
+  // 총 방문자 수 카운트
+  const { mutate: countMutate } = useMutation(todayCounter, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('visitData');
+    },
+  });
+
+  // api 데이터 중 아이템 관련
   const itemListData = selectData?.mappedItemData;
+  // api 데이터 중 페이지 관련
   const pageIndexData = selectData?.pageData;
-  const page: number = Math.ceil(pageIndexData / 16);
+  // 총 페이지 수
+  const page: number = Math.ceil(pageIndexData / 18);
 
+  // submit
   const handleSearchBtnClick = (cityValue: string, titleValue: string) => {
     setPageNumber(1);
     setSubmitCity(cityValue);
     setSubmitTitle(titleValue);
   };
 
+  // 카테고리 선택
   const selectCity = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setCityValue(event.target.value);
   };
+  // 카테고리 선택
   const selectTitle = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setTitleValue(event.target.value);
   };
 
-  const pages = [];
-  for (let i = 1; i < page + 1; i++) {
-    pages.push(i);
-  }
-
+  // 총 방문자 수 카운트
   useEffect(() => {
     countMutate();
   }, []);
@@ -127,7 +131,7 @@ const Main = () => {
                   ))}
                 </List>
                 <CurrentTotalPage>
-                  {pageNumber}/{pages.slice(-1)}
+                  {pageNumber}/{page}
                 </CurrentTotalPage>
                 <Pagination
                   total={page} // 현재 모든페이지 수

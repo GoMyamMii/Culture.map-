@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 //@ts-ignore
@@ -10,9 +10,10 @@ import { readReview } from '../api';
 import MapKakao from '../components/MapKakao';
 
 const Detail = () => {
-  const { kakao } = window;
   const location = useLocation();
   const detailData = location.state;
+
+  // 리뷰 가져오기
   const { data: reviewData, isLoading: reviewLoading } = useQuery(
     'reviews',
     readReview
@@ -23,11 +24,11 @@ const Detail = () => {
 
   const [toggle, setToggle] = useState(false);
 
+  // 스크롤을 0, 0으로 맞춤 (맨 위)
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // 38 ~ 43 -> 조건문이 없으면 undefined에 할당할 수 없다고 하기 때문에 reviewData가 undefined라면 빈 배열을 반환 함.
   let itemData: reviewType[];
   if (reviewData === undefined) {
     itemData = [];
@@ -35,7 +36,6 @@ const Detail = () => {
     itemData = reviewData?.filter((data: reviewType) => data.cultureId === id);
   }
 
-  // const itemData = reviewData?.filter((data: reviewType) => data.cultureId === id);
   if (reviewLoading) {
     return <div>리뷰 로딩중...</div>;
   }

@@ -64,7 +64,24 @@ const Main = () => {
     <MainContainer>
       <MainCarousel />
       {selectLoading ? (
-        <LoadingWrap>로딩중입니다.</LoadingWrap>
+        <>
+          <MainContentsSUI>
+            <SelectWrap>
+              <SelectSUI />
+              <SelectSUI />
+              <SelectSUI />
+              <SelectTextContainerSUI />
+            </SelectWrap>
+            <ItemContainerSUI>
+              <ItemTopWrapSUI />
+              <ItemTopWrapSUI />
+              <ItemTopWrapSUI />
+              <ItemTopWrapSUI />
+              <ItemTopWrapSUI />
+              <ItemTopWrapSUI />
+            </ItemContainerSUI>
+          </MainContentsSUI>
+        </>
       ) : (
         <>
           <SelectWrap>
@@ -157,12 +174,7 @@ const MainContainer = styled.div`
   font-family: 'Noto Sans KR', sans-serif;
   max-width: 100%;
 `;
-const LoadingWrap = styled.div`
-  width: 100vh;
-  height: 500px;
-  text-align: center;
-  padding-top: 30px;
-`;
+
 const MainContents = styled.div`
   display: flex;
   justify-content: center;
@@ -170,8 +182,16 @@ const MainContents = styled.div`
   max-width: 1440px;
 `;
 
+const MainContentsSUI = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1440px;
+`;
+
 const SelectWrap = styled.div`
   display: flex;
+  align-items: center;
   width: 1440px;
   margin: 20px 0;
 `;
@@ -187,6 +207,19 @@ const Select = styled.select`
 
   border-radius: 10px;
   border: 1px solid black;
+`;
+
+const SelectSUI = styled.div`
+  margin-right: 10px;
+  width: 200px;
+  height: 40px;
+
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+
+  border-radius: 10px;
+  background-color: #ddd;
 `;
 
 const SearchBtn = styled.button`
@@ -207,6 +240,13 @@ const SearchBtn = styled.button`
 const SelectTextContainer = styled.div`
   display: flex;
   margin-left: 20px;
+`;
+
+const SelectTextContainerSUI = styled.div`
+  width: 152px;
+  height: 30px;
+  margin-left: 20px;
+  background-color: #ddd;
 `;
 
 const SelectTextBox = styled.div`
@@ -230,6 +270,21 @@ const List = styled.div`
   flex-wrap: wrap;
   width: 100%;
   height: auto;
+`;
+
+const ItemContainerSUI = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 1440px;
+`;
+const ItemTopWrapSUI = styled.div`
+  border-radius: 20px;
+  height: 700px;
+  width: 460px;
+  margin-bottom: 30px;
+  background-color: #ddd;
 `;
 const CurrentTotalPage = styled.div`
   text-align: center;

@@ -18,6 +18,7 @@ import { dbService } from './firebase';
 const BASE_URL = 'https://www.cha.go.kr/cha/SearchKindOpenapiList.do?';
 const IMAGE_URL = 'http://www.cha.go.kr/cha/SearchKindOpenapiDt.do?';
 
+// 선택 카테고리 데이터
 export const getSearchData = async ({ queryKey }: any) => {
   const [_, cityValue, titleValue, pageNumber] = queryKey;
   let data;
@@ -29,7 +30,10 @@ export const getSearchData = async ({ queryKey }: any) => {
       const responseData = new XMLParser().parseFromString(
         response.data
       ).children;
+
+      // 아이템 데이터
       const itemData = responseData.slice(3);
+      // 페이지 데이터
       const pageData = responseData[0].value;
 
       const mappedItemData = itemData?.map((item: ItemType) => [
@@ -51,6 +55,7 @@ export const getSearchData = async ({ queryKey }: any) => {
   return data;
 };
 
+// 디테일 페이지의 들어가는 데이터
 export const getOneData = async ({ queryKey }: any) => {
   const [_, titleNum, careNum, cityNum] = queryKey;
   return await axios
@@ -77,6 +82,7 @@ export const getOneData = async ({ queryKey }: any) => {
     );
 };
 
+// 리뷰 작성
 export const createReview = async (item: reviewType) => {
   await addDoc(collection(dbService, 'reviews'), {
     cultureId: item.cultureId,
@@ -86,6 +92,8 @@ export const createReview = async (item: reviewType) => {
     body: item.body,
   });
 };
+
+// 리뷰 가져오기
 export const readReview = async () => {
   let getReviewsData: reviewType[] = [];
   const q = query(
@@ -103,14 +111,17 @@ export const readReview = async () => {
   return getReviewsData;
 };
 
+// 리뷰 삭제
 export const deleteReview = async (item: reviewType) => {
   deleteDoc(doc(dbService, `reviews/${item.id}`));
 };
 
+// 총 방문자 수
 export const totalVisit = async () => {
   return await getDoc(doc(dbService, 'counter', 'visit'));
 };
 
+// 총 방문자 수 카운트
 export const todayCounter = async () => {
   await updateDoc(doc(dbService, 'counter/visit'), {
     count: increment(1),

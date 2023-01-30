@@ -12,12 +12,13 @@ export default function Modal({
 }) {
   const [password, setPassword] = useState('');
   const queryClient = useQueryClient();
-  const { isLoading: deleteLoading, mutate: deleteMutate } =
-    useMutation(deleteReview);
+  const { mutate: deleteMutate } = useMutation(deleteReview);
 
-  const changePassword = (event: ChangeEvent<HTMLInputElement>) => {
+  // 비밀번호 입력 감지
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   };
+  // 삭제 기능
   const removeReview = () => {
     if (password === item.password) {
       deleteMutate(item, {
@@ -43,7 +44,7 @@ export default function Modal({
         <form onSubmit={removeReview}>
           <Input
             maxLength={8}
-            onChange={changePassword}
+            onChange={onChangePassword}
             type="password"
             placeholder="비밀번호"
           />

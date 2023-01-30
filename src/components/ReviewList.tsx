@@ -16,17 +16,26 @@ const ReviewList = ({
   const [password, setPassword] = useState('');
   const [body, setBody] = useState('');
 
+  // 리뷰 작성 mutation
   const { isLoading: createLoading, mutate: createMutate } =
     useMutation(createReview);
+
+  // 닉네임 감지
   const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
   };
-  const onPasswordName = (event: ChangeEvent<HTMLInputElement>) => {
+
+  // 비밀번호 감지
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   };
-  const onBodyName = (event: ChangeEvent<HTMLInputElement>) => {
+
+  // 내용 감지
+  const onChangeBody = (event: ChangeEvent<HTMLInputElement>) => {
     setBody(event.target.value);
   };
+
+  // 작성
   const submitReview = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     createMutate(
@@ -58,7 +67,7 @@ const ReviewList = ({
         />
         <PasswordInput
           maxLength={8}
-          onChange={onPasswordName}
+          onChange={onChangePassword}
           value={password}
           type="password"
           placeholder="비밀번호"
@@ -66,7 +75,7 @@ const ReviewList = ({
         />
         <BodyInput
           maxLength={48}
-          onChange={onBodyName}
+          onChange={onChangeBody}
           value={body}
           placeholder="내용 (최대 48자)"
           required

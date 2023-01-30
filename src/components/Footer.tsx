@@ -3,10 +3,8 @@ import styled from 'styled-components';
 import { totalVisit } from '../api';
 
 export default function Footer() {
-  const { data: visitData, isLoading: visitLoading } = useQuery(
-    'visitData',
-    totalVisit
-  );
+  // 총 방문자 수
+  const { data: visitData } = useQuery('visitData', totalVisit);
   return (
     <FooterBox>
       <ContentBox>

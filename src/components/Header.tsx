@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function Header() {
+  // 메인 페이지로 이동
   const navigate = useNavigate();
   return (
     <HeaderContainer>

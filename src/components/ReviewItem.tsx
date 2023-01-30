@@ -7,6 +7,7 @@ import { FiTrash2 } from 'react-icons/fi';
 function ReviewItem({ item }: { item: reviewType }) {
   const [deleteToggle, setDeleteToggle] = useState(false);
 
+  // 삭제 모달 띄우기
   const removeModal = () => {
     setDeleteToggle(true);
   };

@@ -8,6 +8,7 @@ interface ItemTopWrapProps {
 }
 
 const ListItem = ({ item }: { item: ItemType }) => {
+  // 하나의 데이터를 가져오는 부분
   const { data, isLoading } = useQuery(
     ['getOneData', item.titleNum, item.careNum, item.cityNum],
     getOneData
@@ -20,6 +21,7 @@ const ListItem = ({ item }: { item: ItemType }) => {
     );
   return (
     <ItemContainer>
+      {/* 디테일 페이지로 이동하는데, state에 데이터를 담아서 이동 */}
       <Link
         style={{ textDecoration: 'none' }}
         to={`/Detail/${item.id}`}
@@ -91,7 +93,6 @@ const NameGeneWarp = styled.div`
 
 const TopName = styled.div`
   writing-mode: vertical-rl;
-  /* text-orientation: upright; */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -103,7 +104,6 @@ const TopName = styled.div`
 `;
 const TopGene = styled.div`
   writing-mode: vertical-rl;
-  /* text-orientation: upright; */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
